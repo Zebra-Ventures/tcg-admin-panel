@@ -1,16 +1,17 @@
 # Multi-stage build para aplicación Angular
 
-# Etapa 1: Build de la aplicación
-FROM node:18-alpine AS build
+# Etapa 1: Build de la aplicación (Node 22 requerido por Angular 20)
+FROM node:22-alpine AS build
 
 # Establecer directorio de trabajo
 WORKDIR /app
 
-# Copiar archivos de configuración de dependencias
+# Copiar manifest de dependencias
 COPY package*.json ./
 
-# Instalar todas las dependencias (incluyendo devDependencies para el build)
-RUN npm ci && npm cache clean --force
+# Instalar dependencias (usa npm ci si hay lockfile, si no, npm install)
+RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi \
+  && npm cache clean --force
 
 # Copiar el código fuente
 COPY . .
@@ -18,16 +19,19 @@ COPY . .
 # Construir la aplicación para producción
 RUN npm run build
 
+# Normalizar salida a /app/build (soporta dist/panelAdmin o dist/panelAdmin/browser)
+RUN mkdir -p /app/build \
+  && if [ -d "/app/dist/panelAdmin/browser" ]; then cp -r /app/dist/panelAdmin/browser/* /app/build/; \
+     elif [ -d "/app/dist/panelAdmin" ]; then cp -r /app/dist/panelAdmin/* /app/build/; \
+     else echo "No se encontró la carpeta de salida del build" && ls -la /app/dist && exit 1; fi
+
 # Etapa 2: Servir con nginx
 FROM nginx:alpine AS production
 
-# Copiar archivos de configuración personalizada de nginx (opcional)
-# COPY nginx.conf /etc/nginx/nginx.conf
+# Copiar archivos construidos normalizados
+COPY --from=build /app/build /usr/share/nginx/html
 
-# Copiar los archivos construidos desde la etapa de build
-COPY --from=build /app/dist/panel-admin /usr/share/nginx/html
-
-# Copiar configuración de nginx para SPA (Single Page Application)
+# Configuración de nginx para SPA
 RUN echo 'server { \
     listen 80; \
     server_name localhost; \
@@ -36,7 +40,7 @@ RUN echo 'server { \
     location / { \
         try_files $uri $uri/ /index.html; \
     } \
-    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg)$ { \
+    location ~* \\.(js|css|png|jpg|jpeg|gif|ico|svg)$ { \
         expires 1y; \
         add_header Cache-Control "public, immutable"; \
     } \
