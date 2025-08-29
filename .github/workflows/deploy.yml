@@ -1,0 +1,105 @@
+name: 'Build & Deploy to Google Artifact Registry'
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  PROJECT_ID: 'admin-zebra'
+  REGION: 'europe-west1'
+  REPOSITORY: 'comodoro'
+  IMAGE_NAME: 'tcg-admin-panel'
+  COMPOSE_PROJECT_PATH: '/opt/docker/projects/tcg-admin-panel'
+  COMPOSE_SERVICE_NAME: 'tcg-admin-panel'
+  DOCKERFILE_PATH: 'Dockerfile'
+
+jobs:
+  build-push-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Google Auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}'
+
+      - name: Set GCP Project
+        run: |
+          gcloud config set project ${{ env.PROJECT_ID }}
+
+      - name: Configure Docker for Artifact Registry
+        run: |
+          gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev
+
+      - name: Build & Push Docker Image
+        run: |
+          TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+          SHORT_SHA=$(echo "${{GITHUB_SHA}}" | cut -c1-7)
+          
+          IMAGE_BASE=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE_NAME }}
+          
+          IMAGE_LATEST=$IMAGE_BASE:latest
+          IMAGE_TAGGED=$IMAGE_BASE:$TIMESTAMP-$SHORT_SHA
+          IMAGE_SHA=$IMAGE_BASE:$SHORT_SHA
+          
+          docker build --pull --no-cache -t $IMAGE_TAGGED -t $IMAGE_LATEST -t $IMAGE_SHA -f "${{ env.DOCKERFILE_PATH }}" .
+          
+          docker push $IMAGE_LATEST
+          docker push $IMAGE_TAGGED
+          docker push $IMAGE_SHA
+          
+          echo "IMAGE_TAG=$TIMESTAMP-$SHORT_SHA" >> $GITHUB_ENV
+          echo "IMAGE_URL=$IMAGE_TAGGED" >> $GITHUB_ENV
+          echo "IMAGE_LATEST=$IMAGE_LATEST" >> $GITHUB_ENV
+
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            set -e
+            echo "Desplegando imagen: ${{ env.IMAGE_URL }}"
+            
+            cd ${{ env.COMPOSE_PROJECT_PATH }}
+            
+            if [ -f docker-compose.yml ]; then
+              cp docker-compose.yml docker-compose.yml.backup
+            fi
+            
+            sed -i "/^  ${{ env.COMPOSE_SERVICE_NAME }}:/,/image:/ s|image:.*|image: ${{ env.IMAGE_URL }}|" docker-compose.yml
+            
+            docker compose pull ${{ env.COMPOSE_SERVICE_NAME }}
+            docker compose up -d ${{ env.COMPOSE_SERVICE_NAME }}
+            
+            sleep 5
+            if docker compose ps ${{ env.COMPOSE_SERVICE_NAME }} | grep -q "Up"; then
+              echo "✅ Despliegue exitoso de ${{ env.IMAGE_NAME }}"
+              if [ -f docker-compose.yml.backup ]; then
+                rm docker-compose.yml.backup
+              fi
+            else
+              echo "❌ Error en el despliegue, restaurando versión anterior"
+              if [ -f docker-compose.yml.backup ]; then
+                mv docker-compose.yml.backup docker-compose.yml
+                docker compose up -d ${{ env.COMPOSE_SERVICE_NAME }}
+              fi
+              exit 1
+            fi
+
+      - name: Deployment Summary
+        run: |
+          echo "🚀 Despliegue completado exitosamente!"
+          echo "📦 Proyecto: admin-zebra"
+          echo "📂 Repositorio: comodoro"
+          echo "🏷️ Imagen: ${{ env.IMAGE_NAME }}"
+          echo "🔖 Tag: ${{ env.IMAGE_TAG }}"
+          echo "🌍 URL completa: ${{ env.IMAGE_LATEST }}"
