@@ -1,33 +1,49 @@
-# Multi-stage build for Angular application
-# Stage 1: Build the application
-FROM node:20-alpine AS build
+# Multi-stage build para aplicación Angular
 
-# Set working directory
+# Etapa 1: Build de la aplicación
+FROM node:18-alpine AS build
+
+# Establecer directorio de trabajo
 WORKDIR /app
 
-# Copy package files
+# Copiar archivos de configuración de dependencias
 COPY package*.json ./
 
-# Install all dependencies (including devDependencies for build)
-RUN npm ci
+# Instalar dependencias
+RUN npm ci --only=production && npm cache clean --force
 
-# Copy source code
+# Copiar el código fuente
 COPY . .
 
-# Build the application for production
+# Construir la aplicación para producción
 RUN npm run build
 
-# Stage 2: Serve the application with nginx
-FROM nginx:alpine
+# Etapa 2: Servir con nginx
+FROM nginx:alpine AS production
 
-# Copy the built application from the build stage
-COPY --from=build /app/dist/panelAdmin /usr/share/nginx/html
+# Copiar archivos de configuración personalizada de nginx (opcional)
+# COPY nginx.conf /etc/nginx/nginx.conf
 
-# Copy nginx configuration
-COPY nginx.conf /etc/nginx/nginx.conf
+# Copiar los archivos construidos desde la etapa de build
+COPY --from=build /app/dist/panel-admin /usr/share/nginx/html
 
-# Expose port (Cloud Run uses PORT environment variable)
-EXPOSE 8080
+# Copiar configuración de nginx para SPA (Single Page Application)
+RUN echo 'server { \
+    listen 80; \
+    server_name localhost; \
+    root /usr/share/nginx/html; \
+    index index.html; \
+    location / { \
+        try_files $uri $uri/ /index.html; \
+    } \
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg)$ { \
+        expires 1y; \
+        add_header Cache-Control "public, immutable"; \
+    } \
+}' > /etc/nginx/conf.d/default.conf
 
-# Start nginx
+# Exponer puerto 80
+EXPOSE 80
+
+# Comando para iniciar nginx
 CMD ["nginx", "-g", "daemon off;"]
