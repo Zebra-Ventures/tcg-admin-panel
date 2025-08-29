@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { AdminAuthService } from '../../services/admin-auth.service';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-admin-auth',
@@ -45,16 +46,17 @@ export class AdminAuthComponent {
     this.loading.set(true);
     this.errorMsg.set(null);
     this.successMsg.set(null);
-    this.adminAuth.loginAdmin(email || '', password || '').subscribe({
-      next: res => {
-        this.successMsg.set('Login exitoso');
-        this.router.navigate(['/admin-panel']);
-      },
-      error: err => {
-        this.errorMsg.set(this.mapError(err));
-      },
-      complete: () => this.loading.set(false)
-    });
+    this.adminAuth.loginAdmin(email || '', password || '')
+      .pipe(finalize(() => this.loading.set(false)))
+      .subscribe({
+        next: res => {
+          this.successMsg.set('Login exitoso');
+          this.router.navigate(['/admin-panel']);
+        },
+        error: err => {
+          this.errorMsg.set(this.mapError(err));
+        }
+      });
   }
 
   submitRegister() {
@@ -63,16 +65,17 @@ export class AdminAuthComponent {
     this.loading.set(true);
     this.errorMsg.set(null);
     this.successMsg.set(null);
-    this.adminAuth.registerAdmin(payload).subscribe({
-      next: res => {
-        this.successMsg.set(res.message || 'Registro exitoso');
-        this.switchMode('login');
-      },
-      error: err => {
-        this.errorMsg.set(this.mapError(err));
-      },
-      complete: () => this.loading.set(false)
-    });
+    this.adminAuth.registerAdmin(payload)
+      .pipe(finalize(() => this.loading.set(false)))
+      .subscribe({
+        next: res => {
+          this.successMsg.set(res.message || 'Registro exitoso');
+          this.switchMode('login');
+        },
+        error: err => {
+          this.errorMsg.set(this.mapError(err));
+        }
+      });
   }
 
   private mapError(err: any): string {
