@@ -81,7 +81,6 @@
   background: #3a4350;
   color: #f9fafb;
   display: grid;
-  grid-template-columns: 160px 1fr 150px 120px 160px 110px 120px;
   padding: 12px 16px;
   font-size: 13px;
   font-weight: 700;
@@ -100,11 +99,9 @@
   border-radius: 12px;
   padding: 12px 8px;
   display: grid;
-  grid-template-columns: 160px 1fr 150px 120px 160px 110px 120px;
   align-items: center;
 }
 .table-row .table-cell:first-child { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-/* Unificar exactamente con ventas/productos */
 .table-cell { padding:4px 8px; color:#374151; font-size:13px; line-height:1.25; min-width:0; white-space:normal; word-break:break-word; }
 .text-muted {
   color: #6b7280;
@@ -176,4 +173,34 @@
 }
 .pagination-pages span {
   opacity: 0.6;
+}
+
+/* Users proportional columns (7) */
+.users-columns { grid-template-columns:
+  minmax(110px,.9fr)   /* ID */
+  minmax(170px,1.5fr)  /* Name */
+  minmax(130px,1fr)    /* Role */
+  minmax(120px,1fr)    /* Status */
+  minmax(200px,2fr)    /* Email */
+  minmax(110px,.9fr)   /* Access */
+  minmax(120px,1fr)    /* Actions */
+  !important; }
+.users-columns > div, .users-columns > .table-cell { display:flex; align-items:center; gap:6px; }
+
+/* Responsive hiding */
+@media (max-width:1150px){
+  .users-columns { grid-template-columns: minmax(110px,.9fr) minmax(170px,1.5fr) minmax(130px,1fr) minmax(200px,2fr) minmax(110px,.9fr) minmax(120px,1fr)!important; }
+  .users-columns > :nth-child(4){ display:none; } /* Status */
+}
+@media (max-width:1000px){
+  .users-columns { grid-template-columns: minmax(110px,.9fr) minmax(170px,1.5fr) minmax(200px,2fr) minmax(110px,.9fr) minmax(120px,1fr)!important; }
+  .users-columns > :nth-child(3){ display:none; } /* Role */
+}
+@media (max-width:860px){
+  .users-columns { grid-template-columns: minmax(170px,1.6fr) minmax(200px,2fr) minmax(110px,.9fr) minmax(120px,1fr)!important; }
+  .users-columns > :nth-child(1){ display:none; } /* ID */
+}
+@media (max-width:720px){
+  .users-columns { grid-template-columns: minmax(170px,1.6fr) minmax(110px,.9fr) minmax(120px,1fr)!important; }
+  .users-columns > :nth-child(5){ display:none; } /* Email */
 }

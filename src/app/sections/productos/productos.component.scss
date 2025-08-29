@@ -215,6 +215,36 @@
   font-size: 12px;
   color: #374151;
 }
+.product-columns { /* 9 columnas proporcionales llenando ancho */
+  grid-template-columns:
+    minmax(190px, 2fr) /* Nombre */
+    minmax(110px, 1fr) /* Estado */
+    minmax(110px, 1fr) /* Tipo */
+    minmax(110px, 1fr) /* Subtipo */
+    minmax(100px, 0.9fr) /* Idioma */
+    minmax(100px, 0.9fr) /* Juego */
+    minmax(130px, 1fr) /* Producto */
+    minmax(90px, 0.8fr)  /* Publicado */
+    minmax(140px, 1fr) /* Fecha */ !important;
+}
+.product-columns > div, .product-columns > .table-cell { display:flex; align-items:center; gap:6px; }
+/* Breakpoints: ocultar progresivamente para mantener consistencia visual */
+@media (max-width:1250px){
+  .product-columns { grid-template-columns: minmax(190px,2fr) minmax(110px,1fr) minmax(110px,1fr) minmax(110px,1fr) minmax(130px,1fr) minmax(90px,0.8fr) minmax(140px,1fr) !important; }
+  .product-columns > :nth-child(5), .product-columns > :nth-child(6){ display:none; }
+}
+@media (max-width:1050px){
+  .product-columns { grid-template-columns: minmax(190px,2fr) minmax(110px,1fr) minmax(110px,1fr) minmax(130px,1fr) minmax(90px,0.8fr) minmax(140px,1fr) !important; }
+  .product-columns > :nth-child(4){ display:none; }
+}
+@media (max-width:900px){
+  .product-columns { grid-template-columns: minmax(190px,2fr) minmax(110px,1fr) minmax(130px,1fr) minmax(90px,0.8fr) minmax(140px,1fr) !important; }
+  .product-columns > :nth-child(3){ display:none; }
+}
+@media (max-width:780px){
+  .product-columns { grid-template-columns: minmax(190px,2fr) minmax(130px,1fr) minmax(90px,0.8fr) minmax(140px,1fr) !important; }
+  .product-columns > :nth-child(2){ display:none; }
+}
 @media (max-width: 1050px) {
   .table-header,
   .table-row {

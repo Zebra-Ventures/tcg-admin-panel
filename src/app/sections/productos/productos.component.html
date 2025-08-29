@@ -12,48 +12,35 @@
 </div>
 
 <div class="data-table">
-    <div class="table-header"> <!-- 7 columnas estándar -->
-        <div>Nombre <svg class="sort-icon" viewBox="0 0 24 24">
-                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" fill="none" />
-            </svg></div>
-        <div>Estado <svg class="sort-icon" viewBox="0 0 24 24">
-                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" fill="none" />
-            </svg></div>
-        <div>Tipo / Subtipo</div>
-        <div>Idioma / Juego</div>
-        <div>Producto <svg class="sort-icon" viewBox="0 0 24 24">
-                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" fill="none" />
-            </svg></div>
+    <div class="table-header product-columns"> <!-- 9 columnas -->
+        <div>Nombre <svg class="sort-icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+        <div>Estado <svg class="sort-icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+        <div>Tipo <svg class="sort-icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+        <div>Subtipo <svg class="sort-icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+        <div>Idioma</div>
+        <div>Juego</div>
+        <div>Producto <svg class="sort-icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
         <div>Publicado</div>
         <div>Fecha</div>
     </div>
     <div class="table-body">
-        <div class="table-row" *ngFor="let p of products">
+        <div class="table-row product-columns" *ngFor="let p of products">
             <div class="table-cell text-muted">{{p.name}}</div>
-            <div class="table-cell"><span class="status-pill" [class.is-paid]="p.status==='Activo'"
-                    [class.is-pending]="p.status==='Pendiente'"
-                    [class.is-cancelled]="p.status==='Inactivo'">{{p.status}}</span></div>
-            <div class="table-cell">{{p.type}} / {{p.subtype}}</div>
-            <div class="table-cell">{{p.language}} / {{p.game}}</div>
+            <div class="table-cell"><span class="status-pill" [class.is-paid]="p.status==='Activo'" [class.is-pending]="p.status==='Pendiente'" [class.is-cancelled]="p.status==='Inactivo'">{{p.status}}</span></div>
+            <div class="table-cell">{{p.type}}</div>
+            <div class="table-cell">{{p.subtype}}</div>
+            <div class="table-cell">{{p.language}}</div>
+            <div class="table-cell">{{p.game}}</div>
             <div class="table-cell">{{p.productCode}}</div>
             <div class="table-cell">{{p.published ? 'Sí' : 'No'}}</div>
             <div class="table-cell date-cell">
                 <div class="date-line">{{p.date}}</div>
                 <div class="date-actions">
                     <div class="action-pill" title="Editar">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M4 20h4l10.5-10.5a1.5 1.5 0 000-2.12L16.62 5.5a1.5 1.5 0 00-2.12 0L4 16v4z" />
-                        </svg>
+                        <svg viewBox="0 0 24 24"><path d="M4 20h4l10.5-10.5a1.5 1.5 0 000-2.12L16.62 5.5a1.5 1.5 0 00-2.12 0L4 16v4z"/></svg>
                     </div>
                     <div class="action-pill" title="Borrar">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M5 7h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                            <path d="M10 11v6M14 11v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                            <path d="M9 7l1-2h4l1 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                        </svg>
+                        <svg viewBox="0 0 24 24"><path d="M5 7h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M10 11v6M14 11v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M9 7l1-2h4l1 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
                     </div>
                 </div>
             </div>

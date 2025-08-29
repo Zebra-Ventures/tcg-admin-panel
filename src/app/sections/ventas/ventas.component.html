@@ -11,7 +11,7 @@
 
 <!-- Sales table (aligned to products/users structure: 7 columns) -->
 <div class="data-table">
-  <div class="table-header">
+  <div class="table-header sales-columns">
     <div>Nº / Pedido</div>
     <div>Cliente</div>
     <div>Vendedor</div>
@@ -21,7 +21,7 @@
     <div>Detalles</div>
   </div>
   <div class="table-body">
-    <div class="table-row" *ngFor="let s of sales; index as i">
+    <div class="table-row sales-columns" *ngFor="let s of sales; index as i">
       <div class="table-cell text-muted">{{ i + 1 }} · {{ s.orderId }}</div>
       <div class="table-cell">{{ s.client }}</div>
       <div class="table-cell">{{ s.seller }}</div>

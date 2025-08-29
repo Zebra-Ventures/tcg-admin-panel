@@ -63,7 +63,6 @@
   background: #3a4350;
   color: #f9fafb;
   display: grid;
-  grid-template-columns: 160px 1fr 150px 120px 160px 110px 120px;
   padding: 12px 16px;
   font-size: 13px;
   font-weight: 700;
@@ -82,13 +81,7 @@
   border-radius: 12px;
   padding: 12px 8px;
   display: grid;
-  grid-template-columns: 160px 1fr 150px 120px 160px 110px 120px;
   align-items: center;
-}
-.table-row .table-cell:first-child {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 .table-cell {
   padding: 4px 8px;
@@ -99,9 +92,31 @@
   white-space: normal;
   word-break: break-word;
 }
+.table-row .table-cell:first-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-/* Allow long text to wrap instead of forcing horizontal scroll */
-/* Status pill keep single line */
+/* Proportional sales columns (7) */
+.sales-columns {
+  grid-template-columns:
+    minmax(140px, 1.2fr) /* Nº / Pedido */
+    minmax(170px, 1.6fr) /* Cliente */
+    minmax(130px, 1.1fr) /* Vendedor */
+    minmax(90px, .8fr)   /* Cantidad */
+    minmax(120px, 1fr)   /* Total */
+    minmax(110px, .9fr)  /* Estado */
+    minmax(110px, .9fr)  /* Detalles */
+    !important;
+}
+.sales-columns > div,
+.sales-columns > .table-cell {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .status-pill {
   display: inline-block;
   padding: 3px 6px;
@@ -192,34 +207,54 @@
   opacity: 0.6;
 }
 
-/* Responsive reductions */
-@media (max-width: 1050px) {
-  .table-header,
-  .table-row {
-    grid-template-columns: 160px 1fr 150px 160px 110px 120px;
+/* Responsive column hiding matching philosophy of products */
+@media (max-width: 1150px) {
+  .sales-columns {
+    grid-template-columns:
+      minmax(140px, 1.2fr)
+      minmax(170px, 1.6fr)
+      minmax(130px, 1.1fr)
+      minmax(120px, 1fr)
+      minmax(110px, .9fr)
+      minmax(110px, .9fr) !important;
   }
-  .table-header > div:nth-child(4),
-  .table-row > .table-cell:nth-child(4) {
+  .sales-columns > :nth-child(4) {
     display: none;
-  } /* Cantidad */
+  } /* hide Cantidad */
 }
-@media (max-width: 880px) {
-  .table-header,
-  .table-row {
-    grid-template-columns: 160px 1fr 160px 110px 120px;
+@media (max-width: 1000px) {
+  .sales-columns {
+    grid-template-columns:
+      minmax(140px, 1.2fr)
+      minmax(170px, 1.6fr)
+      minmax(120px, 1fr)
+      minmax(110px, .9fr)
+      minmax(110px, .9fr) !important;
   }
-  .table-header > div:nth-child(3),
-  .table-row > .table-cell:nth-child(3) {
+  .sales-columns > :nth-child(3) {
     display: none;
-  } /* Vendedor */
+  } /* hide Vendedor */
 }
-@media (max-width: 760px) {
-  .table-header,
-  .table-row {
-    grid-template-columns: 160px 1fr 110px 120px;
+@media (max-width: 860px) {
+  .sales-columns {
+    grid-template-columns:
+      minmax(140px, 1.2fr)
+      minmax(170px, 1.6fr)
+      minmax(110px, .9fr)
+      minmax(110px, .9fr) !important;
   }
-  .table-header > div:nth-child(5),
-  .table-row > .table-cell:nth-child(5) {
+  .sales-columns > :nth-child(5) {
     display: none;
-  } /* Total */
+  } /* hide Total */
+}
+@media (max-width: 720px) {
+  .sales-columns {
+    grid-template-columns:
+      minmax(170px, 1.8fr)
+      minmax(110px, .9fr)
+      minmax(110px, .9fr) !important;
+  }
+  .sales-columns > :nth-child(1) {
+    display: none;
+  } /* hide Nº / Pedido for very small screens keep Client focus */
 }
