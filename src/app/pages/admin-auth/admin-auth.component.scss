@@ -1,0 +1,233 @@
+.admin-auth-container {
+  /* full viewport without causing horizontal scroll */
+//   width: 100%;
+//   min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+//   padding: 2rem 1rem;
+  box-sizing: border-box;
+   background-color: #f4f8f1 !important;
+}
+  
+//   overflow: hidden;
+
+
+.mode-switch {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.mode-switch button {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.75rem;
+}
+.field input {
+  padding: 0.5rem;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+}
+button[type='submit'] {
+  margin-top: 0.5rem;
+  width: 100%;
+  padding: 0.75rem;
+  background: transparent; /* quitamos azul por defecto */
+  color: inherit;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.error {
+  color: #c62828;
+  font-size: 0.75rem;
+}
+.success {
+  color: #2e7d32;
+}
+.messages {
+  margin-top: 1rem;
+}
+.form-section {
+  padding: 40px 0 50px;
+  font-family: Arial, sans-serif;
+}
+.container {
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+hr {
+  margin: 20px auto;
+  width: 100%;
+  color: #41535e;
+}
+.form-control {
+  border: none;
+  border-bottom: 1px solid #aaa;
+  border-radius: 0;
+  margin-bottom: 20px;
+  background: transparent;
+  width: 100%;
+  padding: 10px 6px;
+  outline: none;
+}
+.form-control::placeholder {
+  color: #999;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+.form-control:focus {
+  border-bottom-color: #2c3e50;
+}
+.form-control.is-invalid {
+  border-bottom-color: #dc3545;
+}
+.form-control.is-invalid:focus {
+  border-bottom-color: #dc3545;
+}
+.error-message {
+  margin-bottom: 15px;
+  margin-top: -15px;
+}
+.error-message small {
+  color: #dc3545;
+  font-size: 12px;
+  font-weight: 500;
+}
+.general-error {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+}
+.general-error small {
+  color: #721c24;
+  font-size: 14px;
+}
+.general-success {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  border-radius: 4px;
+}
+.general-success small {
+  color: #155724;
+  font-size: 14px;
+}
+.btn-group-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+.btn-enviar {
+  border-radius: 20px;
+  padding: 10px 30px;
+  font-weight: bold;
+  white-space: nowrap;
+  width: 100%;
+  max-width: 330px;
+  text-align: center;
+  display: block;
+  transition: background-color 0.25s ease, transform 0.05s ease-in;
+  border: none;
+  cursor: pointer;
+}
+.btn-enviar:active {
+  transform: translateY(1px);
+}
+.btn-enviar:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+}
+button.btn-iniciar {
+  background-color: #5a6268 !important; /* fuerza gris desde el inicio */
+  color: #fff !important;
+}
+button.btn-iniciar:hover:not(:disabled) {
+  background-color: #8dc63f !important;
+}
+.btn-iniciar:disabled {
+  background-color: #5a6268; /* mantiene color base cuando disabled */
+}
+.btn-google {
+  background-color: #41535e;
+  color: #fff;
+}
+.btn-google:hover {
+  background-color: #364550;
+}
+.btn-apple {
+  background-color: #000;
+  color: #fff;
+}
+.btn-apple:hover {
+  background-color: #222;
+}
+.btn-icon {
+  height: 18px;
+  width: auto;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+form {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+@media (max-width: 576px) {
+  .btn-enviar {
+    max-width: 100%;
+  }
+}
+.registro-text {
+  text-align: center;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #41535e;
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+.aqui-link {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-weight: 600;
+  color: #8dc63f;
+  cursor: pointer;
+}
+.aqui-link:hover {
+  text-decoration: underline;
+}
+.logo-wrapper {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.logo {
+//   max-width: 180px;
+  width: 20%;
+  height: auto;
+  image-rendering: crisp-edges;
+}
+.title {
+  text-align: center;
+  color: #41535e;
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 10px;
+}

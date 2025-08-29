@@ -1,0 +1,58 @@
+<div class="admin-auth-container">
+  <div class="form-section">
+    <div class="container">
+      <div class="logo-wrapper" aria-label="Logo">
+        <img src="/assets/logo.png" alt="Logo" class="logo" />
+      </div>
+
+      <form *ngIf="mode() === 'login'" [formGroup]="loginForm" (ngSubmit)="submitLogin()" novalidate>
+        <h2 class="title">Inicia sesión administrador</h2>
+        
+        <input type="email" class="form-control" placeholder="Email" formControlName="email" />
+        <input type="password" class="form-control" placeholder="Contraseña" formControlName="password" />
+
+        <div class="general-error" *ngIf="errorMsg()"><small>{{ errorMsg() }}</small></div>
+        <div class="general-success" *ngIf="successMsg()"><small>{{ successMsg() }}</small></div>
+
+        <div class="btn-group-column">
+          <button class="btn-enviar btn-iniciar" type="submit" [disabled]="loading()">
+            Entrar
+          </button>
+        </div>
+
+        <p class="registro-text">¿No tienes cuenta? <span class="aqui-link" (click)="switchMode('register')">Regístrate aquí</span></p>
+      </form>
+
+      <form *ngIf="mode() === 'register'" [formGroup]="registerForm" (ngSubmit)="submitRegister()" novalidate>
+        <h2 class="title">Registro administrador</h2>
+        
+
+        <input type="text" class="form-control" placeholder="Usuario" formControlName="username"
+               [class.is-invalid]="registerForm.get('username')?.invalid && registerForm.get('username')?.touched" />
+        <div class="error-message" *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched">
+          <small>Al menos 3 caracteres</small>
+        </div>
+
+        <input type="email" class="form-control" placeholder="Email" formControlName="email"
+               [class.is-invalid]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" />
+        <div class="error-message" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+          <small>Email inválido</small>
+        </div>
+
+        <input type="password" class="form-control" placeholder="Contraseña" formControlName="password"
+               [class.is-invalid]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" />
+
+        <div class="general-error" *ngIf="errorMsg()"><small>{{ errorMsg() }}</small></div>
+        <div class="general-success" *ngIf="successMsg()"><small>{{ successMsg() }}</small></div>
+
+        <div class="btn-group-column">
+          <button class="btn-enviar btn-iniciar" type="submit" [disabled]="loading() || registerForm.invalid">
+            Crear cuenta
+          </button>
+        </div>
+
+        <p class="registro-text">¿Ya tienes cuenta? <span class="aqui-link" (click)="switchMode('login')">Inicia sesión aquí</span></p>
+      </form>
+    </div>
+  </div>
+</div>

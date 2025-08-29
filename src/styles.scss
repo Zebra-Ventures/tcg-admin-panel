@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Global layout + background for auth page */
+html, body {
+  height: 100%;
+  margin: 0;
+  background: #f4f8f1; /* requested background */
+}
+
+app-root {
+  min-height: 100%;
+  display: block;
+}
+
+/* If other components need a different background later, override locally. */

@@ -1,0 +1,222 @@
+
+<!-- users-panel.component.html -->
+<div class="zb-app">
+  <!-- Sidebar -->
+  <aside>
+    <div class="zb-brand">
+      <div class="zb-badge">@</div>
+      <div>@ADMIN</div>
+    </div>
+    <nav>
+      <div class="zb-nav-item">
+        <svg viewBox="0 0 24 24">
+          <path d="M3 7l9 4 9-4-9-4-9 4zm0 4l9 4 9-4M3 7v10l9 4 9-4V7" />
+        </svg>Productos
+      </div>
+      <div class="zb-nav-item">
+        <svg viewBox="0 0 24 24">
+          <path d="M7 10h10v10H7z" />
+          <path d="M7 4h10v4H7z" />
+        </svg>Ventas
+      </div>
+      <div class="zb-nav-item zb-is-active">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 12a5 5 0 100-10 5 5 0 000 10zM2 22a10 10 0 0120 0" />
+        </svg>Gestión de usuarios
+      </div>
+      <div class="zb-nav-item">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 6v12M6 12h12" />
+        </svg>Configuración
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <main>
+    <div class="zb-container zb-card">
+      <!-- Breadcrumb -->
+      <div class="zb-breadcrumb">
+        <span>PANEL</span><span class="zb-sep">›</span>
+        <span style="color:#111827;font-weight:700">USUARIOS</span>
+        <div style="margin-left:auto; display:flex; gap:14px; align-items:center;">
+          <button class="zb-btn">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" />
+            </svg>
+            Añadir usuario
+          </button>
+        </div>
+      </div>
+
+      <!-- Toolbar (con buscador a la derecha) -->
+      <div class="zb-toolbar">
+        <div class="zb-view-wrap">
+          <span class="zb-h6">Vista</span>
+          <div class="zb-view">
+            Buscar
+            <svg class="zb-caret" viewBox="0 0 24 24">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Input buscar alineado a la derecha -->
+        <div class="zb-search">
+          <svg viewBox="0 0 24 24">
+            <path d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 110-15 7.5 7.5 0 010 15z" />
+          </svg>
+          <input type="text" placeholder="Buscar" />
+        </div>
+      </div>
+
+      <!-- Tabla -->
+      <div class="zb-table">
+        <div class="zb-thead">
+          <div>Nombre</div>
+          <div>Email</div>
+          <div>Teléfono</div>
+          <div>Fecha</div>
+          <div>Total de productos</div>
+          <div>Cartera</div>
+          <div>Acción</div>
+        </div>
+
+        <div class="zb-tbody">
+          <!-- Row 1 -->
+          <div class="zb-row">
+            <div class="zb-cell">Andy</div>
+            <div class="zb-cell zb-muted">Andy@gmail.com</div>
+            <div class="zb-cell zb-muted">6512363455</div>
+            <div class="zb-cell zb-muted">01-01-25</div>
+            <div class="zb-cell">12</div>
+            <div class="zb-cell zb-money">120€</div>
+            <div class="zb-cell">
+              <div class="zb-actions">
+                <div class="zb-pill" title="Ver">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M12 5c5 0 9 7 9 7s-4 7-9 7-9-7-9-7 4-7 9-7zm0 10a3 3 0 110-6 3 3 0 010 6z" />
+                  </svg>
+                </div>
+                <div class="zb-pill" title="Editar">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+                  </svg>
+                </div>
+                <div class="zb-pill" title="Eliminar">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M6 7h12M9 7V5h6v2M7 7l1 12h8l1-12" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="zb-row">
+            <div class="zb-cell">Meri</div>
+            <div class="zb-cell zb-muted">mery@gmail.com</div>
+            <div class="zb-cell zb-muted">6512363455</div>
+            <div class="zb-cell zb-muted">01-01-25</div>
+            <div class="zb-cell">5</div>
+            <div class="zb-cell">35</div>
+            <div class="zb-cell">
+              <div class="zb-actions">
+                <div class="zb-pill" title="Ver">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M12 5c5 0 9 7 9 7s-4 7-9 7-9-7-9-7 4-7 9-7zm0 10a3 3 0 110-6 3 3 0 010 6z" />
+                  </svg>
+                </div>
+                <div class="zb-pill" title="Editar">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+                  </svg>
+                </div>
+                <div class="zb-pill" title="Eliminar">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M6 7h12M9 7V5h6v2M7 7l1 12h8l1-12" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 3 -->
+          <div class="zb-row">
+            <div class="zb-cell">Meri</div>
+            <div class="zb-cell zb-muted">mery@gmail.com</div>
+            <div class="zb-cell zb-muted">6512363455</div>
+            <div class="zb-cell zb-muted">01-01-25</div>
+            <div class="zb-cell">5</div>
+            <div class="zb-cell">35</div>
+            <div class="zb-cell">
+              <div class="zb-actions">
+                <div class="zb-pill" title="Ver">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M12 5c5 0 9 7 9 7s-4 7-9 7-9-7-9-7 4-7 9-7zm0 10a3 3 0 110-6 3 3 0 010 6z" />
+                  </svg>
+                </div>
+                <div class="zb-pill" title="Editar">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+                  </svg>
+                </div>
+                <div class="zb-pill" title="Eliminar">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M6 7h12M9 7V5h6v2M7 7l1 12h8l1-12" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 4 -->
+          <div class="zb-row">
+            <div class="zb-cell">Luis</div>
+            <div class="zb-cell zb-muted">Lusi@gmail.com</div>
+            <div class="zb-cell zb-muted">6512363455</div>
+            <div class="zb-cell zb-muted">01-01-25</div>
+            <div class="zb-cell">7</div>
+            <div class="zb-cell">12</div>
+            <div class="zb-cell">
+              <div class="zb-actions">
+                <div class="zb-pill" title="Ver">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M12 5c5 0 9 7 9 7s-4 7-9 7-9-7-9-7 4-7 9-7zm0 10a3 3 0 110-6 3 3 0 010 6z" />
+                  </svg>
+                </div>
+                <div class="zb-pill" title="Editar">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+                  </svg>
+                </div>
+                <div class="zb-pill" title="Eliminar">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M6 7h12M9 7V5h6v2M7 7l1 12h8l1-12" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- zb-tbody -->
+      </div><!-- zb-table -->
+
+      <!-- Paginación a la derecha -->
+      <div class="zb-pagination">
+        <div class="zb-pager-btn" aria-label="prev">
+          <svg viewBox="0 0 24 24" width="14" height="14">
+            <path d="M15 6l-6 6 6 6" />
+          </svg>
+        </div>
+        <div class="zb-pages">
+          <a class="zb-is-active" href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><span>..</span><a href="#">5</a>
+        </div>
+        <div class="zb-pager-btn" aria-label="next">
+          <svg viewBox="0 0 24 24" width="14" height="14">
+            <path d="M9 6l6 6-6 6" />
+          </svg>
+        </div>
+      </div>
+    </div><!-- zb-card -->
+  </main>
+</div>

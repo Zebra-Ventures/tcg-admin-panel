@@ -1,0 +1,305 @@
+/* users-panel.component.css */
+
+/* Nota: usamos :host para declarar variables dentro del alcance del componente.
+   Si quieres que apliquen a toda la app, muévelas al styles.css global como :root. */
+:host {
+  --bg: #f5f6f7;
+  --panel-bg: #ffffff;
+  --sidebar: #1f2a24;
+  --sidebar-accent: #2e3b33;
+  --green: #77ab59;
+  --green-600: #5b8f40;
+  --border: #e5e7eb;
+  --input: #f3f4f6;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 6px 12px rgba(0, 0, 0, 0.04);
+
+  display: block;
+  color: #1f2937;
+  font: 14px/1.35 'Inter', system-ui, -apple-system, Segoe UI, Roboto;
+  background: var(--bg);
+}
+
+* {
+  box-sizing: border-box;
+}
+.zb-app {
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  min-height: 100vh;
+}
+
+aside {
+  background: var(--bg);
+  color: #3a4350;
+  padding: 18px 14px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.zb-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--green);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-weight: 600;
+  margin-bottom: 18px;
+  color: #fff;
+}
+.zb-brand .zb-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--green-600);
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  color: #fff;
+}
+
+nav {
+  margin-top: 6px;
+}
+.zb-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 10px;
+  border-radius: 8px;
+  color: #3a4350;
+  cursor: pointer;
+}
+.zb-nav-item:hover {
+  background: rgba(119, 171, 89, 0.1);
+}
+.zb-nav-item.zb-is-active {
+  background: var(--green);
+  color: #fff;
+  font-weight: 600;
+}
+.zb-nav-item svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  opacity: 0.85;
+}
+
+.zb-card {
+  background: var(--panel-bg);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+}
+.zb-breadcrumb {
+  color: #6c7280;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--border);
+  font-weight: 500;
+}
+.zb-breadcrumb .zb-sep {
+  opacity: 0.5;
+}
+
+/* Toolbar con buscador a la derecha */
+.zb-toolbar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  padding: 16px 22px;
+  align-items: center;
+}
+.zb-view-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.zb-view {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--input);
+  border: 1px solid #e8eaee;
+  padding: 8px 10px;
+  border-radius: 8px;
+  min-width: 110px;
+  font-weight: 500;
+  color: #374151;
+}
+.zb-view .zb-caret {
+  margin-left: auto;
+  opacity: 0.6;
+}
+
+/* Botón Añadir */
+.zb-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  cursor: pointer;
+  background: var(--green);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.zb-btn:hover {
+  background: var(--green-600);
+}
+.zb-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: #fff;
+}
+
+/* Buscador (lupa) */
+.zb-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--input);
+  border: 1px solid #e8eaee;
+  border-radius: 8px;
+  padding: 6px 10px;
+  width: 200px;
+  justify-self: end; /* se alinea a la derecha en la toolbar */
+}
+.zb-search input {
+  all: unset;
+  flex: 1;
+  font-size: 13px;
+  color: #111827;
+}
+.zb-search svg {
+  width: 16px;
+  height: 16px;
+  opacity: 0.6;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.zb-table {
+  margin: 6px 22px 20px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.zb-thead {
+  background: #3a4350;
+  color: #f9fafb;
+  display: grid;
+  grid-template-columns: 160px 1fr 150px 120px 160px 110px 120px;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.zb-tbody {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #fff;
+  padding: 12px 0 16px;
+}
+.zb-row {
+  margin: 0 12px;
+  background: #f9fafb;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 8px;
+  display: grid;
+  grid-template-columns: 160px 1fr 150px 120px 160px 110px 120px;
+  align-items: center;
+}
+.zb-cell {
+  padding: 4px 8px;
+  color: #374151;
+}
+.zb-muted {
+  color: #6b7280;
+}
+.zb-money {
+  font-weight: 600;
+}
+
+.zb-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+}
+.zb-pill {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #e8efe6;
+  border: 1px solid #d7e4d1;
+  color: #2e7d32;
+  cursor: pointer;
+  transition: transform 0.06s ease;
+}
+.zb-pill:hover {
+  transform: translateY(-1px);
+  background: #e2ecdf;
+}
+.zb-pill svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* Paginación a la derecha */
+.zb-pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 22px 24px;
+  color: #374151;
+}
+.zb-pager-btn {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #e6eaed;
+  color: #111827;
+  cursor: pointer;
+  border: 1px solid #d5dae0;
+}
+.zb-pager-btn svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.zb-pages {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.zb-pages a {
+  color: #111827;
+  text-decoration: none;
+}
+.zb-pages a.zb-is-active {
+  font-weight: 700;
+}
+.zb-pages span {
+  opacity: 0.6;
+}
+
+.zb-container {
+  margin: 0 auto;
+}
+.zb-h6 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111827;
+}
