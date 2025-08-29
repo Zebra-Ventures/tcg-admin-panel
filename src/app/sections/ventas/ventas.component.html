@@ -1,2 +1,49 @@
-<h2 class="sec-title">Sales</h2>
-<p class="sec-muted">Sales panel (placeholder).</p>
+<!-- Toolbar -->
+<div class="table-toolbar">
+  <div class="view-group">
+    <div class="view-selector">Sales <span class="caret-icon">▾</span></div>
+  </div>
+  <div class="search-box">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    <input placeholder="Search..." />
+  </div>
+</div>
+
+<!-- Sales table (aligned to products/users structure: 7 columns) -->
+<div class="data-table">
+  <div class="table-header">
+    <div>Nº / Pedido</div>
+    <div>Cliente</div>
+    <div>Vendedor</div>
+    <div>Cantidad</div>
+    <div>Total</div>
+    <div>Estado</div>
+    <div>Detalles</div>
+  </div>
+  <div class="table-body">
+    <div class="table-row" *ngFor="let s of sales; index as i">
+      <div class="table-cell text-muted">{{ i + 1 }} · {{ s.orderId }}</div>
+      <div class="table-cell">{{ s.client }}</div>
+      <div class="table-cell">{{ s.seller }}</div>
+      <div class="table-cell">{{ s.qty }}</div>
+      <div class="table-cell text-amount">{{ s.total | currency:'EUR':'symbol':'1.2-2' }}</div>
+      <div class="table-cell">
+        <span class="status-pill" [class.is-paid]="s.status==='Pagado'" [class.is-pending]="s.status==='Pendiente'" [class.is-cancelled]="s.status==='Cancelado'">{{ s.status }}</span>
+      </div>
+      <div class="table-cell">
+        <div class="row-actions">
+          <div class="action-pill" title="Ver detalles">
+            <svg viewBox="0 0 24 24"><path d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7zm0 11a4 4 0 110-8 4 4 0 010 8z"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pagination -->
+<div class="pagination">
+  <div class="pagination-button" title="Previous"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <div class="pagination-pages"><a class="is-active">1</a><a>2</a><a>3</a><span>…</span><a>9</a></div>
+  <div class="pagination-button" title="Next"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+</div>
