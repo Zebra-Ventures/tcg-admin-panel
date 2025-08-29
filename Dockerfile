@@ -20,8 +20,8 @@ RUN npm run build
 # Stage 2: Serve the application with nginx
 FROM nginx:alpine
 
-# Copy the built application from the build stage (Angular 17+ structure)
-COPY --from=build /app/dist/frontend/browser /usr/share/nginx/html
+# Copy the built application from the build stage
+COPY --from=build /app/dist/panelAdmin /usr/share/nginx/html
 
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf
