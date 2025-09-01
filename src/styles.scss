@@ -12,4 +12,7 @@ app-root {
   display: block;
 }
 
+/* Shared table styles */
+@import 'styles/tables';
+
 /* If other components need a different background later, override locally. */

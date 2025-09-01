@@ -13,18 +13,21 @@ import { filter } from 'rxjs/operators';
 export class AdminDashboardComponent {
   sectionLabel = signal('Productos');
   actionLabel = signal('Agregar');
+  showUsersSubmenu = signal(false);
 
   private labels: Record<string, string> = {
     products: 'Productos',
     sales: 'Ventas',
     users: 'Gestión de usuarios',
-    settings: 'Configuración'
+    settings: 'Configuración',
+    banned: 'Usuarios baneados'
   };
   private actionLabels: Record<string, string> = {
     products: 'Agregar producto',
     sales: 'Registrar venta',
     users: 'Agregar usuario',
-    settings: 'Guardar ajustes'
+    settings: 'Guardar ajustes',
+    banned: 'Revisar baneos'
   };
 
   constructor(private router: Router) {
@@ -41,5 +44,14 @@ export class AdminDashboardComponent {
     if (this.sectionLabel() !== label) this.sectionLabel.set(label);
     const act = this.actionLabels[seg] || 'Agregar';
     if (this.actionLabel() !== act) this.actionLabel.set(act);
+
+    // Ensure the users submenu is open when we're on any /admin-panel/users route
+    if (url.startsWith('/admin-panel/users')) {
+      if (!this.showUsersSubmenu()) this.showUsersSubmenu.set(true);
+    } else {
+      if (this.showUsersSubmenu()) this.showUsersSubmenu.set(false);
+    }
   }
+
+  toggleUsersSubmenu() { this.showUsersSubmenu.set(!this.showUsersSubmenu()); }
 }

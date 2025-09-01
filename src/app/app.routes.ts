@@ -12,6 +12,7 @@ export const routes: Routes = [
       { path: 'products', loadComponent: () => import('./sections/productos/productos.component').then(c => c.ProductsComponent) },
       { path: 'sales', loadComponent: () => import('./sections/ventas/ventas.component').then(c => c.SalesComponent) },
       { path: 'users', loadComponent: () => import('./sections/usuarios/usuarios.component').then(c => c.UsersComponent) },
+      { path: 'users/banned', loadComponent: () => import('./sections/usuarios-baneados/usuarios-baneados.component').then(c => c.BannedUsersComponent) },
       { path: 'settings', loadComponent: () => import('./sections/configuracion/configuracion.component').then(c => c.SettingsComponent) },
       // Legacy spanish redirects
       { path: 'productos', redirectTo: 'products', pathMatch: 'full' },

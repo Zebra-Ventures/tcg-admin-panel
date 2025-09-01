@@ -3,30 +3,34 @@
   <!-- Sidebar -->
   <aside class="sidebar">
     <div class="sidebar-brand">
-      <div class="brand-badge">@</div>
+      
       <div>@ADMIN</div>
     </div>
     <nav class="sidebar-nav">
       <a class="sidebar-link" routerLink="/admin-panel/products" routerLinkActive="is-active">
-        <svg viewBox="0 0 24 24">
-          <path d="M3 7l9 4 9-4-9-4-9 4zm0 4l9 4 9-4M3 7v10l9 4 9-4V7" />
-        </svg>Productos
+        <img src="assets/barcode.svg" alt="Productos" width="26" height="26" />Productos
       </a>
       <a class="sidebar-link" routerLink="/admin-panel/sales" routerLinkActive="is-active">
-        <svg viewBox="0 0 24 24">
-          <path d="M7 10h10v10H7z" />
-          <path d="M7 4h10v4H7z" />
-        </svg>Ventas
+        <img src="assets/money-send.svg" alt="Productos" width="26" height="26" />Ventas
+
       </a>
-      <a class="sidebar-link" routerLink="/admin-panel/users" routerLinkActive="is-active">
-        <svg viewBox="0 0 24 24">
-          <path d="M12 12a5 5 0 100-10 5 5 0 000 10zM2 22a10 10 0 0120 0" />
-        </svg>Gestión de usuarios
-      </a>
+      <div class="sidebar-group">
+        <!-- Parent acts as toggle only to avoid navigation <-> toggle conflicts -->
+        <a class="sidebar-link has-sub" (click)="toggleUsersSubmenu()" role="button" aria-expanded="{{ showUsersSubmenu() }}">
+          <img src="assets/people.png" alt="Usuarios" width="26" height="26" />Gestión de usuarios
+          <img class="submenu-caret" src="assets/arrow-down.png" alt="abrir" width="14" height="14" [style.transform]="showUsersSubmenu() ? 'rotate(180deg)' : 'rotate(0deg)'" style="transition:transform .18s ease" />
+        </a>
+        <div *ngIf="showUsersSubmenu()" class="sidebar-sublist">
+          <a class="sidebar-sublink" routerLink="/admin-panel/users" routerLinkActive="is-active">
+            <img src="assets/people.png" alt="usuarios" width="20" height="20" /> Usuarios
+          </a>
+          <a class="sidebar-sublink" routerLink="/admin-panel/users/banned" routerLinkActive="is-active">
+            <img src="assets/deleteUsuario.png" alt="baneados" width="20" height="20" /> Usuarios baneados
+          </a>
+        </div>
+      </div>
       <a class="sidebar-link" routerLink="/admin-panel/settings" routerLinkActive="is-active">
-        <svg viewBox="0 0 24 24">
-          <path d="M12 6v12M6 12h12" />
-        </svg>Configuración
+         <img src="assets/setting-2.png" alt="Productos" width="26" height="26" />Configuración
       </a>
     </nav>
   </aside>
