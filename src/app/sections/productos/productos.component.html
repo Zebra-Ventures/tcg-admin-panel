@@ -13,20 +13,37 @@
 
 <div class="data-table">
     <div class="table-header product-columns"> <!-- 9 columnas -->
-        <div>Nombre <svg class="sort-icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
-        <div>Estado <svg class="sort-icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
-        <div>Tipo <svg class="sort-icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
-        <div>Subtipo <svg class="sort-icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+        <div>Nombre <svg class="sort-icon" viewBox="0 0 24 24">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" fill="none" />
+            </svg></div>
+        <div>Estado <svg class="sort-icon" viewBox="0 0 24 24">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" fill="none" />
+            </svg></div>
+        <div>Tipo <svg class="sort-icon" viewBox="0 0 24 24">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" fill="none" />
+            </svg></div>
+        <div>Subtipo <svg class="sort-icon" viewBox="0 0 24 24">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" fill="none" />
+            </svg></div>
         <div>Idioma</div>
         <div>Juego</div>
-        <div>Producto <svg class="sort-icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+        <div>Producto <svg class="sort-icon" viewBox="0 0 24 24">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" fill="none" />
+            </svg></div>
         <div>Publicado</div>
         <div>Fecha</div>
     </div>
     <div class="table-body">
         <div class="table-row product-columns" *ngFor="let p of products">
             <div class="table-cell text-muted">{{p.name}}</div>
-            <div class="table-cell"><span class="status-pill" [class.is-paid]="p.status==='Activo'" [class.is-pending]="p.status==='Pendiente'" [class.is-cancelled]="p.status==='Inactivo'">{{p.status}}</span></div>
+            <div class="table-cell"><span class="status-pill" [class.is-paid]="p.status==='Activo'"
+                    [class.is-pending]="p.status==='Pendiente'"
+                    [class.is-cancelled]="p.status==='Inactivo'">{{p.status}}</span></div>
             <div class="table-cell">{{p.type}}</div>
             <div class="table-cell">{{p.subtype}}</div>
             <div class="table-cell">{{p.language}}</div>
@@ -36,11 +53,11 @@
             <div class="table-cell date-cell">
                 <span class="date-line">{{p.date}}</span>
                 <div class="date-actions">
-                    <div class="action-pill" title="Editar">
-                      <img src="assets/flecha.png" alt="Editar" />
+                    <div class="action-pill" title="Editar" (click)="openEditModal(p)">
+                        <img src="assets/flecha.png" alt="Editar" />
                     </div>
                     <div class="action-pill" title="Borrar">
-                      <img src="assets/delete.png" alt="Borrar" />
+                        <img src="assets/delete.png" alt="Borrar" />
                     </div>
                 </div>
             </div>
@@ -58,4 +75,87 @@
             <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                 stroke-linejoin="round" />
         </svg></div>
+</div>
+
+<!-- Edit product modal (column layout, same fields as edit-product.html) -->
+<div class="modal-backdrop" *ngIf="showEditModal" (click)="closeEditModal()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>Editar producto</h3>
+      <button class="modal-close" (click)="closeEditModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="container containerform-modal">
+        <form>
+          <label for="juego">Juego *</label>
+          <select id="juego" class="form-select" required>
+            <option value="" disabled selected></option>
+            <option value="vtes">Vampire: The Eternal Struggle</option>
+            <option value="mtg">Magic: The Gathering</option>
+          </select>
+
+          <label for="idioma">Idioma *</label>
+          <select id="idioma" class="form-select" required>
+            <option value="" disabled selected></option>
+            <option value="es">Español</option>
+            <option value="en">Inglés</option>
+            <option value="fr">Francés</option>
+          </select>
+
+          <label for="edicion">Edición *</label>
+          <select id="edicion" class="form-select" required>
+            <option value="" disabled selected></option>
+            <option value="1">Primera</option>
+            <option value="2">Segunda</option>
+          </select>
+
+          <label for="tipo">Tipo *</label>
+          <select id="tipo" class="form-select" required>
+            <option value="" disabled selected></option>
+            <option value="criatura">Criatura</option>
+            <option value="hechizo">Hechizo</option>
+          </select>
+
+          <label for="subtipo">Subtipo *</label>
+          <select id="subtipo" class="form-select" required>
+            <option value="" disabled selected></option>
+            <option value="vampiro">Vampiro</option>
+            <option value="brujo">Brujo</option>
+          </select>
+
+          <label for="nombre">Nombre *</label>
+          <select id="nombre" class="form-select" required>
+            <option value="" disabled selected></option>
+            <option value="nombre1">Nombre 1</option>
+            <option value="nombre2">Nombre 2</option>
+          </select>
+
+          <label for="rareza">Rareza *</label>
+          <select id="rareza" class="form-select" required>
+            <option value="" disabled selected> </option>
+            <option value="comun">Común</option>
+            <option value="rara">Rara</option>
+            <option value="épica">Épica</option>
+          </select>
+
+          <label for="precio">Precio *</label>
+          <div class="d-flex mb-3 gap-10">
+            <input type="text" class="form-control currency-prefix" value="€" readonly />
+            <input id="precio" type="number" step="0.01" class="form-control number-input" required />
+          </div>
+
+          <input type="number" class="form-control number-input" placeholder="Cantidad disponible *" required />
+          <input type="text" class="form-control" placeholder="Ubicación del vendedor *" required />
+          <textarea class="form-control" rows="4" placeholder="Observaciones"></textarea>
+
+          <div class="text-center mt-4">
+            <button type="submit" class="btn-enviar">Editar</button>
+          </div>
+          <div class="text-center mt-4">
+            <button type="button" class="btn-enviar btn-cancelar" (click)="closeEditModal()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

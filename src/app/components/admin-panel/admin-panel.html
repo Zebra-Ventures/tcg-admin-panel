@@ -44,14 +44,142 @@
           <span>PANEL</span><span class="breadcrumb-separator">›</span>
           <span style="color:#111827;font-weight:700">{{ sectionLabel() }}</span>
         </div>
-        <button class="btn-action toolbar-action">
+        <button class="btn-action toolbar-action" (click)="onToolbarAction()" [attr.aria-label]="actionLabel()">
           <svg viewBox="0 0 24 24">
             <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
           </svg>
           {{ actionLabel() }}
         </button>
       </div>
-      <router-outlet />
-    </div><!-- dashboard-panel -->
+      <!-- Upload product modal (in-panel) -->
+      <div class="modal-backdrop" *ngIf="showUploadModal()" (click)="closeUploadModal()">
+        <div class="modal" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <h3>Subir producto</h3>
+            <button class="modal-close" (click)="closeUploadModal()">✕</button>
+          </div>
+          <div class="modal-body">
+            <!-- Exact same form structure as subir-producto.html, column layout preserved -->
+            <div class="container form-prod-container-modal">
+              <form>
+                <label>Juego *</label>
+                <select class="form-select form-prod-input" required>
+                    <option value="" disabled selected></option>
+                    <option value="vtes">Vampire: The Eternal Struggle</option>
+                    <option value="mtg">Magic: The Gathering</option>
+                </select>
+
+                <label>Idioma *</label>
+                <select class="form-select form-prod-input" required>
+                    <option value="" disabled selected></option>
+                    <option value="es">Español</option>
+                    <option value="en">Inglés</option>
+                    <option value="fr">Francés</option>
+                </select>
+
+                <label>Edición *</label>
+                <select class="form-select form-prod-input" required>
+                    <option value="" disabled selected></option>
+                    <option value="1">Primera</option>
+                    <option value="2">Segunda</option>
+                </select>
+
+                <label>Tipo *</label>
+                <select class="form-select form-prod-input" required>
+                    <option value="" disabled selected></option>
+                    <option value="criatura">Criatura</option>
+                    <option value="hechizo">Hechizo</option>
+                </select>
+
+                <label>Subtipo *</label>
+                <select class="form-select form-prod-input" required>
+                    <option value="" disabled selected></option>
+                    <option value="vampiro">Vampiro</option>
+                    <option value="brujo">Brujo</option>
+                </select>
+
+                <label>Nombre *</label>
+                <select class="form-select form-prod-input" required>
+                    <option value="" disabled selected></option>
+                    <option value="nombre1">Nombre 1</option>
+                    <option value="nombre2">Nombre 2</option>
+                </select>
+
+                <label>Rareza *</label>
+                <select class="form-select form-prod-input" required>
+                    <option value="" disabled selected></option>
+                    <option value="comun">Común</option>
+                    <option value="rara">Rara</option>
+                    <option value="épica">Épica</option>
+                </select>
+
+                <label>Precio *</label>
+                <div class="d-flex mb-3 form-prod-price">
+                    <input type="text" class="form-control" value="€" readonly>
+                    <input type="number" step="0.01" class="form-control form-prod-number" required>
+                </div>
+
+                <input type="number" class="form-control form-prod-input" placeholder="Cantidad disponible *" required />
+                <input type="text" class="form-control form-prod-input" placeholder="Ubicación del vendedor *" required />
+                <textarea class="form-control form-prod-input" rows="4" placeholder="Observaciones"></textarea>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn form-prod-btn">Subir</button>
+                    <button type="button" class="btn form-prod-btn form-prod-btn-cancel" (click)="closeUploadModal()">Cancelar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Add user modal (in-panel) -->
+      <div class="modal-backdrop" *ngIf="showAddUserModal()" (click)="closeAddUserModal()">
+        <div class="modal" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <h3>Agregar usuario</h3>
+            <button class="modal-close" (click)="closeAddUserModal()">✕</button>
+          </div>
+          <div class="modal-body">
+            <div class="container form-user-modal">
+              <form>
+                <label>Nombre *</label>
+                <input type="text" class="form-control" placeholder="Nombre completo *" required />
+
+                <label>Email *</label>
+                <input type="email" class="form-control" placeholder="usuario@ejemplo.com *" required />
+
+                <label>Rol *</label>
+                <select class="form-select" required>
+                  <option value="" disabled selected></option>
+                  <option value="admin">Admin</option>
+                  <option value="editor">Editor</option>
+                  <option value="viewer">Viewer</option>
+                </select>
+
+                <label>Estado</label>
+                <select class="form-select">
+                  <option value="active">Activo</option>
+                  <option value="suspended">Suspendido</option>
+                  <option value="banned">Baneado</option>
+                </select>
+
+                <label>Acceso</label>
+                <select class="form-select">
+                  <option value="full">Full</option>
+                  <option value="limited">Limited</option>
+                  <option value="read">Read</option>
+                </select>
+
+                <div class="text-center mt-4">
+                  <button type="submit" class="btn form-prod-btn">Agregar</button>
+                  <button type="button" class="btn form-prod-btn form-prod-btn-cancel" (click)="closeAddUserModal()">Cancelar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+       <router-outlet />
+     </div><!-- dashboard-panel -->
   </main>
 </div>

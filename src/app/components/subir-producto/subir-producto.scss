@@ -1,0 +1,84 @@
+/* Contenedor */
+.form-prod-container {
+    width: 50%;
+}
+
+/* Inputs generales */
+.form-prod-input {
+    border-radius: 10px;
+    margin-bottom: 15px;
+    padding: 10px 14px;
+}
+
+/* Selects */
+.form-prod-input.form-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 16px;
+    background-color: white;
+}
+
+/* Botones */
+.form-prod-btn {
+    background-color: #8dc63f;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 30px;
+    border: none;
+    font-weight: bold;
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    display: block;
+}
+
+.form-prod-btn:hover {
+    background-color: #7ab832;
+}
+
+.form-prod-btn-cancel {
+    background-color: #41535E !important;
+}
+
+/* Label */
+label {
+    padding-bottom: 5px;
+    font-weight: 500;
+}
+
+/* Título */
+.form-prod-title {
+    font-weight: bold;
+    font-size: 78px;
+    text-align: center;
+    margin-top: 40px;
+    color: #2c3e50;
+}
+
+/* Input tipo number */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+    padding-right: 40px;
+}
+
+/* Precio */
+.form-prod-price input:first-child {
+    max-width: 90px;
+    border-radius: 10px;
+}
+
+.form-prod-number {
+    border-radius: 10px;
+}

@@ -1,0 +1,76 @@
+   <div class="container py-5">
+        <h1 class="form-prod-title">SUBIR PRODUCTO</h1>
+        <hr />
+
+        <div class="container form-prod-container">
+            <form>
+                <label for="">Juego *</label>
+                <select class="form-select form-prod-input" required>
+                    <option value="" disabled selected></option>
+                    <option value="vtes">Vampire: The Eternal Struggle</option>
+                    <option value="mtg">Magic: The Gathering</option>
+                </select>
+
+                <label for="">Idioma *</label>
+                <select class="form-select form-prod-input" required>
+                    <option value="" disabled selected></option>
+                    <option value="es">Español</option>
+                    <option value="en">Inglés</option>
+                    <option value="fr">Francés</option>
+                </select>
+
+                <label for="">Edición *</label>
+                <select class="form-select form-prod-input" required>
+                    <option value="" disabled selected></option>
+                    <option value="1">Primera</option>
+                    <option value="2">Segunda</option>
+                </select>
+
+                <label for="">Tipo *</label>
+                <select class="form-select form-prod-input" required>
+                    <option value="" disabled selected></option>
+                    <option value="criatura">Criatura</option>
+                    <option value="hechizo">Hechizo</option>
+                </select>
+
+                <label for="">Subtipo *</label>
+                <select class="form-select form-prod-input" required>
+                    <option value="" disabled selected></option>
+                    <option value="vampiro">Vampiro</option>
+                    <option value="brujo">Brujo</option>
+                </select>
+
+                <label for="">Nombre *</label>
+                <select class="form-select form-prod-input" required>
+                    <option value="" disabled selected></option>
+                    <option value="nombre1">Nombre 1</option>
+                    <option value="nombre2">Nombre 2</option>
+                </select>
+
+                <label for="">Rareza *</label>
+                <select class="form-select form-prod-input" required>
+                    <option value="" disabled selected></option>
+                    <option value="comun">Común</option>
+                    <option value="rara">Rara</option>
+                    <option value="épica">Épica</option>
+                </select>
+
+                <label for="">Precio *</label>
+                <div class="d-flex mb-3 form-prod-price">
+                    <input type="text" class="form-control" value="€" readonly>
+                    <input type="number" step="0.01" class="form-control form-prod-number" required>
+                </div>
+
+                <input type="number" class="form-control form-prod-input" placeholder="Cantidad disponible *" required />
+                <input type="text" class="form-control form-prod-input" placeholder="Ubicación del vendedor *" required />
+                <textarea class="form-control form-prod-input" rows="4" placeholder="Observaciones"></textarea>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn form-prod-btn">Subir</button>
+                </div>
+                <div class="text-center mt-4">
+                    <button type="button" class="btn form-prod-btn form-prod-btn-cancel">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>

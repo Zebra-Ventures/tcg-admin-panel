@@ -10,12 +10,14 @@ export const routes: Routes = [
     children: [
       // New English paths
       { path: 'products', loadComponent: () => import('./sections/productos/productos.component').then(c => c.ProductsComponent) },
+      { path: 'products/subir', loadComponent: () => import('./components/subir-producto/subir-producto').then(c => c.SubirProducto) },
       { path: 'sales', loadComponent: () => import('./sections/ventas/ventas.component').then(c => c.SalesComponent) },
       { path: 'users', loadComponent: () => import('./sections/usuarios/usuarios.component').then(c => c.UsersComponent) },
       { path: 'users/banned', loadComponent: () => import('./sections/usuarios-baneados/usuarios-baneados.component').then(c => c.BannedUsersComponent) },
       { path: 'settings', loadComponent: () => import('./sections/configuracion/configuracion.component').then(c => c.SettingsComponent) },
       // Legacy spanish redirects
       { path: 'productos', redirectTo: 'products', pathMatch: 'full' },
+      { path: 'productos/subir', redirectTo: 'products/subir', pathMatch: 'full' },
       { path: 'ventas', redirectTo: 'sales', pathMatch: 'full' },
       { path: 'usuarios', redirectTo: 'users', pathMatch: 'full' },
       { path: 'configuracion', redirectTo: 'settings', pathMatch: 'full' },

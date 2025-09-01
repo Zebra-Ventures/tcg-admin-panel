@@ -56,4 +56,18 @@ export class ProductsComponent {
       date: '2025-08-05',
     },
   ];
+
+  // Modal state for editing a product
+  showEditModal = false;
+  selectedProduct: ProductRow | null = null;
+
+  openEditModal(p: ProductRow) {
+    this.selectedProduct = p;
+    this.showEditModal = true;
+  }
+
+  closeEditModal() {
+    this.selectedProduct = null;
+    this.showEditModal = false;
+  }
 }

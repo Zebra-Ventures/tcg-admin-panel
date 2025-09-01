@@ -1,0 +1,110 @@
+/* Campos de formulario */
+form .form-control,
+form .form-select {
+  border-radius: 10px;
+  margin-bottom: 15px;
+  padding: 10px 14px;
+}
+
+/* Selects con flecha personalizada (usa assets/flecha.png) */
+form .form-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('/assets/flecha.png');
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 16px;
+  background-color: white;
+}
+
+/* Botones */
+.btn-enviar {
+  background-color: #8dc63f;
+  color: white;
+  border-radius: 20px;
+  padding: 10px 30px;
+  border: none;
+  font-weight: bold;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  display: block;
+}
+
+.btn-enviar:hover {
+  background-color: #7ab832;
+}
+
+.btn-cancelar {
+  background-color: #41535E;
+}
+
+.btn-cancelar:hover {
+  filter: brightness(1.05);
+}
+
+label {
+  padding-bottom: 5px;
+  font-weight: 500;
+}
+
+/* Título */
+.title {
+  font-weight: bold;
+  font-size: 78px;
+  text-align: center;
+  margin-top: 40px;
+  color: #2c3e50;
+}
+
+/* Personalizar inputs numéricos */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+  background-image: url('/assets/flecha.png');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+  padding-right: 40px;
+}
+
+/* Prefijo de moneda */
+.currency-prefix {
+  max-width: 90px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* Helpers */
+.gap-10 {
+  gap: 10px;
+}
+
+/* Contenedor del formulario */
+.containerform {
+  width: 50%;
+  margin: 0 auto;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .containerform {
+    width: 75%;
+  }
+  .title {
+    font-size: 48px;
+  }
+}
+@media (max-width: 576px) {
+  .containerform {
+    width: 100%;
+  }
+  .title {
+    font-size: 36px;
+  }
+}
