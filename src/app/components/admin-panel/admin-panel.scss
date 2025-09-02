@@ -39,7 +39,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  background: #5B7347;
+  background: #5b7347;
   border-radius: 8px;
   padding: 10px 12px;
   font-weight: 600;
@@ -192,7 +192,7 @@
 }
 .btn-action.toolbar-action {
   justify-self: end;
-  background-color: #95C31B;
+  background-color: #95c31b;
 }
 
 /* Buscador (lupa) */
@@ -227,15 +227,6 @@
   margin: 6px 22px 20px;
   border-radius: 12px;
   overflow: hidden;
-}
-.table-header {
-  background: #3a4350;
-  color: #f9fafb;
-  display: grid;
-  grid-template-columns: 160px 1fr 150px 120px 160px 110px 120px;
-  padding: 12px 16px;
-  font-size: 13px;
-  font-weight: 700;
 }
 .table-body {
   display: flex;

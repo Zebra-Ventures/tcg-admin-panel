@@ -78,6 +78,9 @@
   padding: 12px 16px;
   font-size: 13px;
   font-weight: 700;
+  margin: 0 12px; /* align width with .table-row */
+  border-radius: 12px; /* same curvature */
+  border: 1px solid var(--border, #e5e7eb); /* visual consistency */
 }
 .table-body {
   display: flex;
