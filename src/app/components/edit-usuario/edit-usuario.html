@@ -1,0 +1,41 @@
+<div class="upload-form-wrapper">
+  <h1 class="form-prod-title">EDITAR USUARIO</h1>
+  <hr />
+  <form class="upload-form" (ngSubmit)="submit()" #form="ngForm">
+    <label for="id">ID</label>
+    <input id="id" type="text" class="form-control form-prod-input" [value]="user.id" disabled />
+
+    <label for="name">Nombre *</label>
+    <input id="name" name="name" type="text" class="form-control form-prod-input" [(ngModel)]="user.name" required />
+
+    <label for="email">Email *</label>
+    <input id="email" name="email" type="email" class="form-control form-prod-input" [(ngModel)]="user.email" required />
+
+    <label for="role">Rol *</label>
+    <select id="role" name="role" class="form-select form-prod-input" [(ngModel)]="user.role" required>
+      <option value="" disabled selected></option>
+      <option value="Admin">Admin</option>
+      <option value="Editor">Editor</option>
+      <option value="Viewer">Viewer</option>
+    </select>
+
+    <label for="status">Estado *</label>
+    <select id="status" name="status" class="form-select form-prod-input" [(ngModel)]="user.status" required>
+      <option value="Active">Activo</option>
+      <option value="Suspended">Suspendido</option>
+      <option value="Banned">Baneado</option>
+    </select>
+
+    <label for="access">Acceso *</label>
+    <select id="access" name="access" class="form-select form-prod-input" [(ngModel)]="user.access" required>
+      <option value="Full">Full</option>
+      <option value="Limited">Limited</option>
+      <option value="Read">Read</option>
+    </select>
+
+    <div class="form-actions">
+      <button type="submit" class="btn form-prod-btn" [disabled]="form.invalid">Guardar</button>
+      <button type="button" class="btn form-prod-btn form-prod-btn-cancel" (click)="cancel()">Cancelar</button>
+    </div>
+  </form>
+</div>

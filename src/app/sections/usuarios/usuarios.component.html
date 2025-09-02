@@ -24,65 +24,23 @@
     <div>Actions</div>
   </div>
   <div class="table-body">
-    <div class="table-row users-columns">
-      <div class="table-cell text-muted">#U001</div>
-      <div class="table-cell">Juan Perez</div>
-      <div class="table-cell">Admin</div>
-      <div class="table-cell">Active</div>
-      <div class="table-cell">juan@example.com</div>
-      <div class="table-cell text-amount">Full</div>
+    <div class="table-row users-columns" *ngFor="let u of users()">
+      <div class="table-cell text-muted">{{ u.id }}</div>
+      <div class="table-cell">{{ u.name }}</div>
+      <div class="table-cell">{{ u.role }}</div>
+      <div class="table-cell">{{ u.status }}</div>
+      <div class="table-cell">{{ u.email }}</div>
+      <div class="table-cell text-amount">{{ u.access }}</div>
       <div class="table-cell">
         <div class="row-actions">
-          <div class="action-pill" title="Edit">
-             <img  src="assets/flecha.png" alt="Editar">
+          <div class="action-pill" title="Edit" (click)="openEditUser(u)">
+            <img src="assets/flecha.png" alt="Editar" />
           </div>
           <div class="action-pill" title="Delete">
-            <img  src="assets/delete.png" alt="Editar">
+            <img src="assets/papelera.png" alt="Eliminar" />
           </div>
-          <div class="action-pill" title="Delete">
-            <img  src="assets/deleteUser.png" alt="Editar">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="table-row users-columns">
-      <div class="table-cell text-muted">#U002</div>
-      <div class="table-cell">Maria Lopez</div>
-      <div class="table-cell">Editor</div>
-      <div class="table-cell">Active</div>
-      <div class="table-cell">maria@example.com</div>
-      <div class="table-cell text-amount">Limited</div>
-      <div class="table-cell">
-        <div class="row-actions">
-           <div class="action-pill" title="Edit">
-             <img  src="assets/flecha.png" alt="Editar">
-          </div>
-          <div class="action-pill" title="Delete">
-            <img  src="assets/papelera.png" alt="Editar">
-          </div>
-          <div class="action-pill" title="Delete">
-            <img  src="assets/deleteUser.png" alt="Editar">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="table-row users-columns">
-      <div class="table-cell text-muted">#U003</div>
-      <div class="table-cell">Carlos Ruiz</div>
-      <div class="table-cell">Viewer</div>
-      <div class="table-cell">Suspended</div>
-      <div class="table-cell">carlos@example.com</div>
-      <div class="table-cell text-amount">Read</div>
-      <div class="table-cell">
-        <div class="row-actions">
-          <div class="action-pill" title="Edit">
-             <img  src="assets/flecha.png" alt="Editar">
-          </div>
-          <div class="action-pill" title="Delete">
-            <img  src="assets/papelera.png" alt="Editar">
-          </div>
-          <div class="action-pill" title="Delete">
-            <img  src="assets/deleteUser.png" alt="Editar">
+          <div class="action-pill" title="Ban">
+            <img src="assets/deleteUser.png" alt="Banear" />
           </div>
         </div>
       </div>
@@ -104,5 +62,17 @@
     <svg viewBox="0 0 24 24">
       <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
     </svg>
+  </div>
+</div>
+
+<!-- Edit User Modal -->
+<div class="modal-backdrop" *ngIf="showEditUserModal()" (click)="closeEditUserModal()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <button class="modal-close" (click)="closeEditUserModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <app-edit-usuario *ngIf="selectedUser()" [user]="selectedUser()!" (save)="onUserSave($event)" (cancelEdit)="closeEditUserModal()"></app-edit-usuario>
+    </div>
   </div>
 </div>

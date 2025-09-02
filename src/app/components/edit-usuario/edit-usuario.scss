@@ -1,0 +1,14 @@
+/* Reuse modal unified styles - only minimal overrides if absolutely necessary */
+.upload-form-wrapper { 
+  width:100%; max-width:560px; margin:0 auto; display:flex; flex-direction:column; align-items:center; padding:24px 20px 40px; 
+}
+.upload-form-wrapper hr { width:100%; border:0; height:1px; background:#d1d5db; margin:12px 0 18px; }
+.form-prod-title { font-weight:bold; font-size:50px; text-align:center; margin-top:40px; color:#2c3e50; }
+.upload-form { width:100%; display:flex; flex-direction:column; }
+.form-prod-input, .form-control, .form-select { border-radius:10px; margin-bottom:15px; padding:10px 14px; }
+.form-actions { display:flex; flex-direction:column; gap:12px; margin-top:10px; align-items:center; }
+.form-actions > .btn { display:block; width:100%; max-width:260px; }
+.form-prod-btn { background:#8dc63f; color:#fff; border-radius:20px; padding:10px 30px; border:none; font-weight:bold; width:100%; max-width:200px; margin:0 auto; display:block; }
+.form-prod-btn:hover { background:#7ab832; }
+.form-prod-btn-cancel { background:#41535E !important; }
+@media (max-width:620px){ .form-prod-title { font-size:48px; } .upload-form-wrapper { padding:16px 14px 32px; } }
