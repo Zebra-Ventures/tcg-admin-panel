@@ -41,7 +41,7 @@ jobs:
       - name: Build & Push Docker Image
         run: |
           TIMESTAMP=$(date +%Y%m%d-%H%M%S)
-          SHORT_SHA=$(echo "${{GITHUB_SHA}}" | cut -c1-7)
+          SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
           
           IMAGE_BASE=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE_NAME }}
           
