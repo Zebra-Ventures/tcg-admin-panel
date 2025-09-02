@@ -22,10 +22,10 @@
   border: 1px solid #e8eaee;
   padding: 8px 12px;
   border-radius: 8px;
-  min-width: 110px;
+  min-width: 20px;
   font-weight: 500;
   color: #374151;
-  height: 38px;
+  height: 8px; /* was 8px, made tall enough to show content */
   line-height: 1;
   font-size: 13px;
 }
@@ -39,21 +39,33 @@
   background: var(--input, #f3f4f6);
   border: 1px solid #e8eaee;
   border-radius: 8px;
-  padding: 8px 12px;
-  width: 200px;
+  padding: 0 4px;
+  width: 135px;
   justify-self: end;
-  height: 38px;
+  height: 28px; /* requested tiny bar height */
+  min-height: 8px; /* enforce */
+  overflow: visible; /* allow icon to render outside */
+  position: relative;
+}
+.search-box svg {
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  transform: translateY(-50%) scale(0.55); /* scale to fit visual */
+  transform-origin: center;
+  width: 26px;
+  height: 86px;
+  display: block;
 }
 .search-box input {
+  display: none; /* remove if only icon bar is needed with 8px height */
   all: unset;
   flex: 1;
   font-size: 13px;
   color: #111827;
   line-height: 1;
-}
-.search-box svg {
-  width: 16px;
-  height: 16px;
+text-align: center;
+margin-left: -30px;
 }
 .data-table {
   margin: 6px 22px 20px;

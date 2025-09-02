@@ -3,7 +3,7 @@
   <!-- Sidebar -->
   <aside class="sidebar">
     <div class="sidebar-brand">
-      
+
       <div>@ADMIN</div>
     </div>
     <nav class="sidebar-nav">
@@ -16,9 +16,12 @@
       </a>
       <div class="sidebar-group">
         <!-- Parent acts as toggle only to avoid navigation <-> toggle conflicts -->
-        <a class="sidebar-link has-sub" (click)="toggleUsersSubmenu()" role="button" aria-expanded="{{ showUsersSubmenu() }}">
+        <a class="sidebar-link has-sub" (click)="toggleUsersSubmenu()" role="button"
+          aria-expanded="{{ showUsersSubmenu() }}">
           <img src="assets/people.png" alt="Usuarios" width="26" height="26" />Gestión de usuarios
-          <img class="submenu-caret" src="assets/arrow-down.png" alt="abrir" width="14" height="14" [style.transform]="showUsersSubmenu() ? 'rotate(180deg)' : 'rotate(0deg)'" style="transition:transform .18s ease" />
+          <img class="submenu-caret" src="assets/arrow-down.png" alt="abrir" width="14" height="14"
+            [style.transform]="showUsersSubmenu() ? 'rotate(180deg)' : 'rotate(0deg)'"
+            style="transition:transform .18s ease" />
         </a>
         <div *ngIf="showUsersSubmenu()" class="sidebar-sublist">
           <a class="sidebar-sublink" routerLink="/admin-panel/users" routerLinkActive="is-active">
@@ -30,7 +33,7 @@
         </div>
       </div>
       <a class="sidebar-link" routerLink="/admin-panel/settings" routerLinkActive="is-active">
-         <img src="assets/setting-2.png" alt="Productos" width="26" height="26" />Configuración
+        <img src="assets/setting-2.png" alt="Productos" width="26" height="26" />Configuración
       </a>
     </nav>
   </aside>
@@ -55,80 +58,12 @@
       <div class="modal-backdrop" *ngIf="showUploadModal()" (click)="closeUploadModal()">
         <div class="modal" (click)="$event.stopPropagation()">
           <div class="modal-header">
-            <h3>Subir producto</h3>
+            <!-- <h3>Subir producto</h3> -->
             <button class="modal-close" (click)="closeUploadModal()">✕</button>
           </div>
           <div class="modal-body">
-            <!-- Exact same form structure as subir-producto.html, column layout preserved -->
-            <div class="container form-prod-container-modal">
-              <form>
-                <label>Juego *</label>
-                <select class="form-select form-prod-input" required>
-                    <option value="" disabled selected></option>
-                    <option value="vtes">Vampire: The Eternal Struggle</option>
-                    <option value="mtg">Magic: The Gathering</option>
-                </select>
-
-                <label>Idioma *</label>
-                <select class="form-select form-prod-input" required>
-                    <option value="" disabled selected></option>
-                    <option value="es">Español</option>
-                    <option value="en">Inglés</option>
-                    <option value="fr">Francés</option>
-                </select>
-
-                <label>Edición *</label>
-                <select class="form-select form-prod-input" required>
-                    <option value="" disabled selected></option>
-                    <option value="1">Primera</option>
-                    <option value="2">Segunda</option>
-                </select>
-
-                <label>Tipo *</label>
-                <select class="form-select form-prod-input" required>
-                    <option value="" disabled selected></option>
-                    <option value="criatura">Criatura</option>
-                    <option value="hechizo">Hechizo</option>
-                </select>
-
-                <label>Subtipo *</label>
-                <select class="form-select form-prod-input" required>
-                    <option value="" disabled selected></option>
-                    <option value="vampiro">Vampiro</option>
-                    <option value="brujo">Brujo</option>
-                </select>
-
-                <label>Nombre *</label>
-                <select class="form-select form-prod-input" required>
-                    <option value="" disabled selected></option>
-                    <option value="nombre1">Nombre 1</option>
-                    <option value="nombre2">Nombre 2</option>
-                </select>
-
-                <label>Rareza *</label>
-                <select class="form-select form-prod-input" required>
-                    <option value="" disabled selected></option>
-                    <option value="comun">Común</option>
-                    <option value="rara">Rara</option>
-                    <option value="épica">Épica</option>
-                </select>
-
-                <label>Precio *</label>
-                <div class="d-flex mb-3 form-prod-price">
-                    <input type="text" class="form-control" value="€" readonly>
-                    <input type="number" step="0.01" class="form-control form-prod-number" required>
-                </div>
-
-                <input type="number" class="form-control form-prod-input" placeholder="Cantidad disponible *" required />
-                <input type="text" class="form-control form-prod-input" placeholder="Ubicación del vendedor *" required />
-                <textarea class="form-control form-prod-input" rows="4" placeholder="Observaciones"></textarea>
-
-                <div class="text-center mt-4">
-                    <button type="submit" class="btn form-prod-btn">Subir</button>
-                    <button type="button" class="btn form-prod-btn form-prod-btn-cancel" (click)="closeUploadModal()">Cancelar</button>
-                </div>
-              </form>
-            </div>
+            <!-- Reuse subir-producto component layout -->
+            <app-subir-producto></app-subir-producto>
           </div>
         </div>
       </div>
@@ -136,50 +71,15 @@
       <div class="modal-backdrop" *ngIf="showAddUserModal()" (click)="closeAddUserModal()">
         <div class="modal" (click)="$event.stopPropagation()">
           <div class="modal-header">
-            <h3>Agregar usuario</h3>
+            <!-- <h3>Agregar usuario</h3> -->
             <button class="modal-close" (click)="closeAddUserModal()">✕</button>
           </div>
           <div class="modal-body">
-            <div class="container form-user-modal">
-              <form>
-                <label>Nombre *</label>
-                <input type="text" class="form-control" placeholder="Nombre completo *" required />
-
-                <label>Email *</label>
-                <input type="email" class="form-control" placeholder="usuario@ejemplo.com *" required />
-
-                <label>Rol *</label>
-                <select class="form-select" required>
-                  <option value="" disabled selected></option>
-                  <option value="admin">Admin</option>
-                  <option value="editor">Editor</option>
-                  <option value="viewer">Viewer</option>
-                </select>
-
-                <label>Estado</label>
-                <select class="form-select">
-                  <option value="active">Activo</option>
-                  <option value="suspended">Suspendido</option>
-                  <option value="banned">Baneado</option>
-                </select>
-
-                <label>Acceso</label>
-                <select class="form-select">
-                  <option value="full">Full</option>
-                  <option value="limited">Limited</option>
-                  <option value="read">Read</option>
-                </select>
-
-                <div class="text-center mt-4">
-                  <button type="submit" class="btn form-prod-btn">Agregar</button>
-                  <button type="button" class="btn form-prod-btn form-prod-btn-cancel" (click)="closeAddUserModal()">Cancelar</button>
-                </div>
-              </form>
-            </div>
+            <app-add-usuario></app-add-usuario>
           </div>
         </div>
       </div>
-       <router-outlet />
-     </div><!-- dashboard-panel -->
+      <router-outlet />
+    </div><!-- dashboard-panel -->
   </main>
 </div>

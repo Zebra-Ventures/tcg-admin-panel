@@ -1,77 +1,71 @@
-<p>edit-product works!</p>
-<div class="container py-5">
-  <h1 class="title">EDITAR PRODUCTO</h1>
+<div class="upload-form-wrapper">
+  <h1 class="form-prod-title">EDITAR PRODUCTO</h1>
   <hr />
+  <form class="upload-form">
+    <label for="juego">Juego *</label>
+    <select id="juego" class="form-select form-prod-input" required>
+      <option value="" disabled selected></option>
+      <option value="vtes">Vampire: The Eternal Struggle</option>
+      <option value="mtg">Magic: The Gathering</option>
+    </select>
 
-  <div class="container containerform">
-    <form>
-      <label for="juego">Juego *</label>
-      <select id="juego" class="form-select" required>
-        <option value="" disabled selected></option>
-        <option value="vtes">Vampire: The Eternal Struggle</option>
-        <option value="mtg">Magic: The Gathering</option>
-      </select>
+    <label for="idioma">Idioma *</label>
+    <select id="idioma" class="form-select form-prod-input" required>
+      <option value="" disabled selected></option>
+      <option value="es">Español</option>
+      <option value="en">Inglés</option>
+      <option value="fr">Francés</option>
+    </select>
 
-      <label for="idioma">Idioma *</label>
-      <select id="idioma" class="form-select" required>
-        <option value="" disabled selected></option>
-        <option value="es">Español</option>
-        <option value="en">Inglés</option>
-        <option value="fr">Francés</option>
-      </select>
+    <label for="edicion">Edición *</label>
+    <select id="edicion" class="form-select form-prod-input" required>
+      <option value="" disabled selected></option>
+      <option value="1">Primera</option>
+      <option value="2">Segunda</option>
+    </select>
 
-      <label for="edicion">Edición *</label>
-      <select id="edicion" class="form-select" required>
-        <option value="" disabled selected></option>
-        <option value="1">Primera</option>
-        <option value="2">Segunda</option>
-      </select>
+    <label for="tipo">Tipo *</label>
+    <select id="tipo" class="form-select form-prod-input" required>
+      <option value="" disabled selected></option>
+      <option value="criatura">Criatura</option>
+      <option value="hechizo">Hechizo</option>
+    </select>
 
-      <label for="tipo">Tipo *</label>
-      <select id="tipo" class="form-select" required>
-        <option value="" disabled selected></option>
-        <option value="criatura">Criatura</option>
-        <option value="hechizo">Hechizo</option>
-      </select>
+    <label for="subtipo">Subtipo *</label>
+    <select id="subtipo" class="form-select form-prod-input" required>
+      <option value="" disabled selected></option>
+      <option value="vampiro">Vampiro</option>
+      <option value="brujo">Brujo</option>
+    </select>
 
-      <label for="subtipo">Subtipo *</label>
-      <select id="subtipo" class="form-select" required>
-        <option value="" disabled selected></option>
-        <option value="vampiro">Vampiro</option>
-        <option value="brujo">Brujo</option>
-      </select>
+    <label for="nombre">Nombre *</label>
+    <select id="nombre" class="form-select form-prod-input" required>
+      <option value="" disabled selected></option>
+      <option value="nombre1">Nombre 1</option>
+      <option value="nombre2">Nombre 2</option>
+    </select>
 
-      <label for="nombre">Nombre *</label>
-      <select id="nombre" class="form-select" required>
-        <option value="" disabled selected></option>
-        <option value="nombre1">Nombre 1</option>
-        <option value="nombre2">Nombre 2</option>
-      </select>
+    <label for="rareza">Rareza *</label>
+    <select id="rareza" class="form-select form-prod-input" required>
+      <option value="" disabled selected></option>
+      <option value="comun">Común</option>
+      <option value="rara">Rara</option>
+      <option value="épica">Épica</option>
+    </select>
 
-      <label for="rareza">Rareza *</label>
-      <select id="rareza" class="form-select" required>
-        <option value="" disabled selected> </option>
-        <option value="comun">Común</option>
-        <option value="rara">Rara</option>
-        <option value="épica">Épica</option>
-      </select>
+    <label for="precio">Precio *</label>
+    <div class="form-prod-price">
+      <input type="text" class="form-control" value="€" readonly />
+      <input id="precio" type="number" step="0.01" class="form-control form-prod-number" required />
+    </div>
 
-      <label for="precio">Precio *</label>
-      <div class="d-flex mb-3 gap-10">
-        <input type="text" class="form-control currency-prefix" value="€" readonly />
-        <input id="precio" type="number" step="0.01" class="form-control number-input" required />
-      </div>
+    <input type="number" class="form-control form-prod-input" placeholder="Cantidad disponible *" required />
+    <input type="text" class="form-control form-prod-input" placeholder="Ubicación del vendedor *" required />
+    <textarea class="form-control form-prod-input" rows="4" placeholder="Observaciones"></textarea>
 
-      <input type="number" class="form-control number-input" placeholder="Cantidad disponible *" required />
-      <input type="text" class="form-control" placeholder="Ubicación del vendedor *" required />
-      <textarea class="form-control" rows="4" placeholder="Observaciones"></textarea>
-
-      <div class="text-center mt-4">
-        <button type="submit" class="btn-enviar">Editar</button>
-      </div>
-      <div class="text-center mt-4">
-        <button type="button" class="btn-enviar btn-cancelar">Cancelar</button>
-      </div>
-    </form>
-  </div>
+    <div class="form-actions">
+      <button type="submit" class="btn form-prod-btn">Editar</button>
+      <button type="button" class="btn form-prod-btn form-prod-btn-cancel">Cancelar</button>
+    </div>
+  </form>
 </div>

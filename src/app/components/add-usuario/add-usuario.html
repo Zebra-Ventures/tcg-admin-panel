@@ -1,1 +1,38 @@
-<p>add-usuario works!</p>
+<div class="upload-form-wrapper">
+  <h1 class="form-prod-title">AGREGAR USUARIO</h1>
+  <hr />
+  <form class="upload-form">
+    <label for="nombre">Nombre *</label>
+    <input id="nombre" type="text" class="form-control form-prod-input" placeholder="Nombre completo *" required />
+
+    <label for="email">Email *</label>
+    <input id="email" type="email" class="form-control form-prod-input" placeholder="usuario@ejemplo.com *" required />
+
+    <label for="rol">Rol *</label>
+    <select id="rol" class="form-select form-prod-input" required>
+      <option value="" disabled selected></option>
+      <option value="admin">Admin</option>
+      <option value="editor">Editor</option>
+      <option value="viewer">Viewer</option>
+    </select>
+
+    <label for="estado">Estado</label>
+    <select id="estado" class="form-select form-prod-input">
+      <option value="active">Activo</option>
+      <option value="suspended">Suspendido</option>
+      <option value="banned">Baneado</option>
+    </select>
+
+    <label for="acceso">Acceso</label>
+    <select id="acceso" class="form-select form-prod-input">
+      <option value="full">Full</option>
+      <option value="limited">Limited</option>
+      <option value="read">Read</option>
+    </select>
+
+    <div class="form-actions">
+      <button type="submit" class="btn form-prod-btn">Agregar</button>
+      <button type="button" class="btn form-prod-btn form-prod-btn-cancel">Cancelar</button>
+    </div>
+  </form>
+</div>

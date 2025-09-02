@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { EditProduct } from '../../components/edit-product/edit-product';
 
 interface ProductRow {
   name: string;
@@ -16,7 +17,7 @@ interface ProductRow {
 @Component({
   standalone: true,
   selector: 'app-products-section',
-  imports: [CommonModule],
+  imports: [CommonModule, EditProduct],
   templateUrl: './productos.component.html',
   styleUrl: './productos.component.scss',
 })

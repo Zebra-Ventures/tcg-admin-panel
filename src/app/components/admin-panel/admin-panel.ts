@@ -3,11 +3,12 @@ import { Router, RouterOutlet, NavigationEnd, RouterLink, RouterLinkActive } fro
 import { CommonModule } from '@angular/common';
 import { filter } from 'rxjs/operators';
 import { SubirProducto } from '../subir-producto/subir-producto';
+import { AddUsuario } from '../add-usuario/add-usuario';
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, SubirProducto],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, SubirProducto, AddUsuario],
   templateUrl: './admin-panel.html',
   styleUrl: './admin-panel.scss'
 })

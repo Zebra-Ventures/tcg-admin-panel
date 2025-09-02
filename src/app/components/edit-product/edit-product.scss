@@ -7,42 +7,42 @@ form .form-select {
 }
 
 /* Selects con flecha personalizada (usa assets/flecha.png) */
-form .form-select {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-image: url('/assets/flecha.png');
-  background-repeat: no-repeat;
-  background-position: right 1rem center;
-  background-size: 16px;
-  background-color: white;
-}
+/* form .form-select { */
+/*   appearance: none; */
+/*   -webkit-appearance: none; */
+/*   -moz-appearance: none; */
+/*   background-image: url('/assets/flecha.png'); */
+/*   background-repeat: no-repeat; */
+/*   background-position: right 1rem center; */
+/*   background-size: 16px; */
+/*   background-color: white; */
+/* } */
 
 /* Botones */
-.btn-enviar {
-  background-color: #8dc63f;
-  color: white;
-  border-radius: 20px;
-  padding: 10px 30px;
-  border: none;
-  font-weight: bold;
-  width: 100%;
-  max-width: 200px;
-  margin: 0 auto;
-  display: block;
-}
+/* .btn-enviar { */
+/*   background-color: #8dc63f; */
+/*   color: white; */
+/*   border-radius: 20px; */
+/*   padding: 10px 30px; */
+/*   border: none; */
+/*   font-weight: bold; */
+/*   width: 100%; */
+/*   max-width: 200px; */
+/*   margin: 0 auto; */
+/*   display: block; */
+/* } */
 
-.btn-enviar:hover {
-  background-color: #7ab832;
-}
+/* .btn-enviar:hover { */
+/*   background-color: #7ab832; */
+/* } */
 
-.btn-cancelar {
-  background-color: #41535E;
-}
+/* .btn-cancelar { */
+/*   background-color: #41535E; */
+/* } */
 
-.btn-cancelar:hover {
-  filter: brightness(1.05);
-}
+/* .btn-cancelar:hover { */
+/*   filter: brightness(1.05); */
+/* } */
 
 label {
   padding-bottom: 5px;
@@ -66,11 +66,8 @@ input[type=number]::-webkit-outer-spin-button {
 }
 input[type=number] {
   -moz-appearance: textfield;
-  background-image: url('/assets/flecha.png');
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 20px;
-  padding-right: 40px;
+  background: none;
+  padding-right: 12px;
 }
 
 /* Prefijo de moneda */
@@ -91,6 +88,46 @@ input[type=number] {
   margin: 0 auto;
 }
 
+/* Upload Form Styles */
+.upload-form-wrapper { 
+  width:100%; 
+  max-width:560px; 
+  margin:0 auto; 
+  display:flex; 
+  flex-direction:column; 
+  align-items:center; 
+  padding:24px 20px 40px; 
+}
+.upload-form-wrapper hr { 
+  width:100%;
+  border:0; 
+  height:1px; 
+  background:#d1d5db; 
+  margin:12px 0 18px; 
+}
+.upload-form { 
+  width:100%; 
+  display:flex; 
+  flex-direction:column; 
+  align-items:stretch; 
+}
+.form-actions { 
+  display:flex; 
+  flex-direction:column; 
+  gap:12px; 
+  margin-top:10px; 
+  align-items:center; 
+}
+.form-actions .form-prod-btn, .form-actions .btn-enviar { max-width:260px; width:100%; }
+.form-prod-input { border-radius:10px; margin-bottom:15px; padding:10px 14px; }
+.form-prod-price { display:flex; gap:8px; }
+.form-prod-number { border-radius:10px; }
+.form-prod-title { font-weight:bold; font-size:78px; text-align:center; margin-top:40px; color:#2c3e50; }
+.form-actions .form-prod-btn { display:block !important; }
+.form-prod-btn { background-color:#8dc63f; color:#fff; border-radius:20px; padding:10px 30px; border:none; font-weight:bold; width:100%; max-width:200px; margin:0 auto; display:block; }
+.form-prod-btn:hover { background-color:#7ab832; }
+.form-prod-btn-cancel { background-color:#41535E !important; }
+
 /* Responsive */
 @media (max-width: 992px) {
   .containerform {
@@ -107,4 +144,8 @@ input[type=number] {
   .title {
     font-size: 36px;
   }
+}
+@media (max-width:620px){ 
+  .form-prod-title { font-size:48px; } 
+  .upload-form-wrapper { padding:16px 14px 32px; } 
 }
