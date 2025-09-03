@@ -13,24 +13,14 @@
 
     <label for="role">Rol *</label>
     <select id="role" name="role" class="form-select form-prod-input" [(ngModel)]="user.role" required>
-      <option value="" disabled selected></option>
       <option value="Admin">Admin</option>
-      <option value="Editor">Editor</option>
-      <option value="Viewer">Viewer</option>
+      <option value="User">User</option>
     </select>
 
     <label for="status">Estado *</label>
     <select id="status" name="status" class="form-select form-prod-input" [(ngModel)]="user.status" required>
       <option value="Active">Activo</option>
-      <option value="Suspended">Suspendido</option>
-      <option value="Banned">Baneado</option>
-    </select>
-
-    <label for="access">Acceso *</label>
-    <select id="access" name="access" class="form-select form-prod-input" [(ngModel)]="user.access" required>
-      <option value="Full">Full</option>
-      <option value="Limited">Limited</option>
-      <option value="Read">Read</option>
+      <option value="Inactive">Inactivo</option>
     </select>
 
     <div class="form-actions">

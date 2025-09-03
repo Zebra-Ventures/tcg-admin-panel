@@ -42,6 +42,12 @@
         <input type="password" class="form-control" placeholder="Contraseña" formControlName="password"
                [class.is-invalid]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" />
 
+        <input type="text" class="form-control" placeholder="Clave secreta admin" formControlName="adminSecret"
+               [class.is-invalid]="registerForm.get('adminSecret')?.invalid && registerForm.get('adminSecret')?.touched" />
+        <div class="error-message" *ngIf="registerForm.get('adminSecret')?.invalid && registerForm.get('adminSecret')?.touched">
+          <small>La clave secreta es requerida</small>
+        </div>
+
         <div class="general-error" *ngIf="errorMsg()"><small>{{ errorMsg() }}</small></div>
         <div class="general-success" *ngIf="successMsg()"><small>{{ successMsg() }}</small></div>
 

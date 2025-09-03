@@ -10,7 +10,7 @@ import { finalize } from 'rxjs';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './admin-auth.component.html',
-  styleUrl: './admin-auth.component.scss'
+  styleUrl: './admin-auth.component.scss',
 })
 export class AdminAuthComponent {
   private fb = inject(FormBuilder);
@@ -25,14 +25,15 @@ export class AdminAuthComponent {
   // Login sin validaciones estrictas como solicitaste
   loginForm = this.fb.group({
     email: [''],
-    password: ['']
+    password: [''],
   });
 
   // Registro mantiene validaciones
   registerForm = this.fb.group({
     username: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]]
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    adminSecret: ['', [Validators.required]],
   });
 
   switchMode(m: 'login' | 'register') {
@@ -46,35 +47,44 @@ export class AdminAuthComponent {
     this.loading.set(true);
     this.errorMsg.set(null);
     this.successMsg.set(null);
-    this.adminAuth.loginAdmin(email || '', password || '')
+    console.log('[AdminAuthComponent] submitLogin -> endpoint base:', this.adminAuth.getBaseUrl());
+    this.adminAuth
+      .loginAdmin(email || '', password || '')
       .pipe(finalize(() => this.loading.set(false)))
       .subscribe({
-        next: res => {
+        next: (res) => {
+          const access = this.adminAuth.getAdminAccessToken();
+          const user = this.adminAuth.getAdminUser();
+          console.log('[AdminAuthComponent] Login OK. access (inicio):', access?.substring(0, 25) + '...');
+          console.log('[AdminAuthComponent] User almacenado:', user);
           this.successMsg.set('Login exitoso');
           this.router.navigate(['/admin-panel']);
         },
-        error: err => {
+        error: (err) => {
           this.errorMsg.set(this.mapError(err));
-        }
+        },
       });
   }
 
   submitRegister() {
     if (this.registerForm.invalid) return;
-    const payload = this.registerForm.value as any;
+    const { username, email, password, adminSecret } = this.registerForm.value;
     this.loading.set(true);
     this.errorMsg.set(null);
     this.successMsg.set(null);
-    this.adminAuth.registerAdmin(payload)
+    console.log('[AdminAuthComponent] submitRegister -> endpoint base:', this.adminAuth.getBaseUrl());
+    this.adminAuth
+      .registerAndLoginAdmin({ username: username || '', email: email || '', password: password || '' }, adminSecret || '')
       .pipe(finalize(() => this.loading.set(false)))
       .subscribe({
-        next: res => {
-          this.successMsg.set(res.message || 'Registro exitoso');
-          this.switchMode('login');
+        next: (res) => {
+          console.log('[AdminAuthComponent] Registro+Login OK. Respuesta login:', res);
+          this.successMsg.set('Registro y sesión iniciada');
+          this.router.navigate(['/admin-panel']);
         },
-        error: err => {
+        error: (err) => {
           this.errorMsg.set(this.mapError(err));
-        }
+        },
       });
   }
 

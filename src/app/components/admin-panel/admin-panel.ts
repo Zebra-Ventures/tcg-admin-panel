@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { filter } from 'rxjs/operators';
 import { SubirProducto } from '../subir-producto/subir-producto';
 import { AddUsuario } from '../add-usuario/add-usuario';
+import { AdminAuthService } from '../../services/admin-auth.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -18,6 +19,7 @@ export class AdminDashboardComponent {
   showUsersSubmenu = signal(false);
   showUploadModal = signal(false);
   showAddUserModal = signal(false);
+  adminUsername = signal<string>('');
 
   private labels: Record<string, string> = {
     products: 'Productos',
@@ -34,11 +36,14 @@ export class AdminDashboardComponent {
     banned: 'Revisar baneos'
   };
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private adminAuth: AdminAuthService) {
     this.updateLabelFromUrl(this.router.url);
     this.router.events
       .pipe(filter(e => e instanceof NavigationEnd))
       .subscribe((e: any) => this.updateLabelFromUrl(e.urlAfterRedirects || e.url));
+
+    const stored = this.adminAuth.getAdminUser();
+    if (stored?.username) this.adminUsername.set(stored.username);
   }
 
   private updateLabelFromUrl(url: string) {

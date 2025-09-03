@@ -12,8 +12,22 @@
   </div>
 </div>
 
+<!-- Loader overlay -->
+<div *ngIf="loading()" class="loader-overlay">
+  <div class="loader-card">
+    <div class="spinner">
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+    </div>
+    <div class="loader-text">Cargando usuarios...</div>
+  </div>
+</div>
+
+<div *ngIf="error()" style="padding:0 22px 10px;font-size:13px;color:#b91c1c;">{{ error() }}</div>
+
 <!-- Users table -->
-<div class="data-table">
+<div class="data-table" *ngIf="!loading() && !error() && users().length">
   <div class="table-header users-columns">
     <div>ID</div>
     <div>Name</div>
@@ -36,7 +50,7 @@
           <div class="action-pill" title="Edit" (click)="openEditUser(u)">
             <img src="assets/flecha.png" alt="Editar" />
           </div>
-          <div class="action-pill" title="Delete">
+          <div class="action-pill" title="Delete" (click)="deleteUser(u)">
             <img src="assets/papelera.png" alt="Eliminar" />
           </div>
           <div class="action-pill" title="Ban">
@@ -47,9 +61,10 @@
     </div>
   </div>
 </div>
+<div *ngIf="!loading() && !error() && !users().length" style="padding:0 22px 10px;font-size:13px;color:#6b7280;">No hay usuarios.</div>
 
 <!-- Pagination -->
-<div class="pagination">
+<div class="pagination" *ngIf="users().length">
   <div class="pagination-button" title="Previous">
     <svg viewBox="0 0 24 24">
       <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -72,6 +87,8 @@
       <button class="modal-close" (click)="closeEditUserModal()">✕</button>
     </div>
     <div class="modal-body">
+      <div *ngIf="editError()" style="color:#b91c1c;font-size:13px;margin-bottom:10px;">{{ editError() }}</div>
+      <div *ngIf="savingEdit()" style="font-size:13px;color:#374151;margin-bottom:10px;">Guardando cambios...</div>
       <app-edit-usuario *ngIf="selectedUser()" [user]="selectedUser()!" (save)="onUserSave($event)" (cancelEdit)="closeEditUserModal()"></app-edit-usuario>
     </div>
   </div>

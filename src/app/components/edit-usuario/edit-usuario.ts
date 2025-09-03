@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 export interface EditableUser {
-  id: string;
-  name: string;
-  role: string;
-  status: string;
+  id: string; // formatted id (#U001)
+  name: string; // username
+  role: string; // 'Admin' | 'User'
+  status: string; // 'Active' | 'Inactive'
   email: string;
-  access: string;
+  access: string; // keep for shape compatibility
+  _numId?: number; // original numeric backend id
 }
 
 @Component({

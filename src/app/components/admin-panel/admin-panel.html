@@ -4,7 +4,7 @@
   <aside class="sidebar">
     <div class="sidebar-brand">
 
-      <div>@ADMIN</div>
+      <div>@{{ adminUsername() || 'ADMIN' }}</div>
     </div>
     <nav class="sidebar-nav">
       <a class="sidebar-link" routerLink="/admin-panel/products" routerLinkActive="is-active">

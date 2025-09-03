@@ -4,6 +4,7 @@ import { AdminDashboardComponent } from './components/admin-panel/admin-panel';
 
 export const routes: Routes = [
   { path: 'admin-auth', component: AdminAuthComponent },
+  { path: 'confirm-account/:uid/:token', loadComponent: () => import('./pages/confirm-account/confirm-account.component').then(c => c.ConfirmAccountComponent) },
   {
     path: 'admin-panel',
     component: AdminDashboardComponent,

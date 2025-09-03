@@ -1,0 +1,13 @@
+<div class="confirm-wrapper" [class.loading]="loading()">
+  <div class="confirm-card" [class.success]="success() === true" [class.error]="success() === false">
+    <div class="status-icon">
+      <ng-container *ngIf="loading(); else doneTpl">⏳</ng-container>
+      <ng-template #doneTpl>
+        <span *ngIf="success() === true">✅</span>
+        <span *ngIf="success() === false">❌</span>
+      </ng-template>
+    </div>
+    <p class="message">{{ message() }}</p>
+    <button *ngIf="success() === false && !loading()" class="retry-btn" (click)="location.reload()">Reintentar</button>
+  </div>
+</div>
