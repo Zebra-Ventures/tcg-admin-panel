@@ -1,7 +1,7 @@
 <!-- Toolbar -->
 <div class="table-toolbar">
   <div class="view-group">
-    <div class="view-selector">Users <span class="caret-icon">▾</span></div>
+    <div class="view-selector">Banned Users <span class="caret-icon">▾</span></div>
   </div>
   <div class="search-box">
     <svg viewBox="0 0 24 24">
@@ -12,8 +12,11 @@
   </div>
 </div>
 
-<!-- Users table -->
-<div class="data-table">
+<div *ngIf="loading()" style="padding:18px 22px;font-size:13px;color:#374151;">Cargando usuarios baneados...</div>
+<div *ngIf="error()" style="padding:0 22px 10px;font-size:13px;color:#b91c1c;">{{ error() }}</div>
+
+<!-- Banned users table -->
+<div class="data-table" *ngIf="!loading() && !error() && bannedUsers().length">
   <div class="table-header users-columns">
     <div>ID</div>
     <div>Name</div>
@@ -24,85 +27,42 @@
     <div>Actions</div>
   </div>
   <div class="table-body">
-    <div class="table-row users-columns">
-      <div class="table-cell text-muted">#U001</div>
-      <div class="table-cell">Juan Perez</div>
-      <div class="table-cell">Admin</div>
-      <div class="table-cell">Active</div>
-      <div class="table-cell">juan@example.com</div>
-      <div class="table-cell text-amount">Full</div>
+    <div class="table-row users-columns" *ngFor="let u of bannedUsers()">
+      <div class="table-cell text-muted">{{ u.id }}</div>
+      <div class="table-cell">{{ u.name }}</div>
+      <div class="table-cell">{{ u.role }}</div>
+      <div class="table-cell">{{ u.status }}</div>
+      <div class="table-cell">{{ u.email }}</div>
+      <div class="table-cell text-amount">{{ u.access }}</div>
       <div class="table-cell">
         <div class="row-actions">
-          <div class="action-pill" title="Edit">
-             <img  src="assets/flecha.png" alt="Editar">
-          </div>
-          <div class="action-pill" title="Delete">
-            <img  src="assets/papelera.png" alt="Editar">
-          </div>
-          <div class="action-pill" title="Delete">
-            <img  src="assets/deleteUsuario.png" alt="Editar">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="table-row users-columns">
-      <div class="table-cell text-muted">#U002</div>
-      <div class="table-cell">Maria Lopez</div>
-      <div class="table-cell">Editor</div>
-      <div class="table-cell">Active</div>
-      <div class="table-cell">maria@example.com</div>
-      <div class="table-cell text-amount">Limited</div>
-      <div class="table-cell">
-        <div class="row-actions">
-           <div class="action-pill" title="Edit">
-             <img  src="assets/flecha.png" alt="Editar">
-          </div>
-          <div class="action-pill" title="Delete">
-            <img  src="assets/papelera.png" alt="Editar">
-          </div>
-          <div class="action-pill" title="Delete">
-            <img  src="assets/deleteUsuario.png" alt="Editar">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="table-row users-columns">
-      <div class="table-cell text-muted">#U003</div>
-      <div class="table-cell">Carlos Ruiz</div>
-      <div class="table-cell">Viewer</div>
-      <div class="table-cell">Suspended</div>
-      <div class="table-cell">carlos@example.com</div>
-      <div class="table-cell text-amount">Read</div>
-      <div class="table-cell">
-        <div class="row-actions">
-          <div class="action-pill" title="Edit">
-             <img  src="assets/flecha.png" alt="Editar">
-          </div>
-          <div class="action-pill" title="Delete">
-            <img  src="assets/papelera.png" alt="Editar">
-          </div>
-          <div class="action-pill" title="Delete">
-            <img  src="assets/deleteUsuario.png" alt="Editar">
+          <div class="action-pill" title="Unban" (click)="openUnbanConfirm(u)">
+            <img src="assets/deleteUser.png" alt="Unban" />
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+<div *ngIf="!loading() && !error() && !bannedUsers().length" style="padding:0 22px 10px;font-size:13px;color:#6b7280;">No hay usuarios baneados.</div>
 
-<!-- Pagination -->
-<div class="pagination">
-  <div class="pagination-button" title="Previous">
-    <svg viewBox="0 0 24 24">
-      <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-    </svg>
-  </div>
-  <div class="pagination-pages">
-    <a class="is-active">1</a><a>2</a><a>3</a><span>…</span><a>9</a>
-  </div>
-  <div class="pagination-button" title="Next">
-    <svg viewBox="0 0 24 24">
-      <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-    </svg>
+<!-- Unban Confirmation Modal -->
+<div class="modal-backdrop" *ngIf="showUnbanConfirm()" (click)="cancelUnban()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <button class="modal-close" (click)="cancelUnban()">✕</button>
+    </div>
+    <div class="modal-body">
+      <h3 style="margin:0 0 12px;font-size:18px;font-weight:600;">Confirmar desbaneo</h3>
+      <p style="margin:0 0 16px;font-size:14px;line-height:1.4;">¿Seguro que deseas desbanear al usuario <strong>{{ userToUnban()?.name }}</strong>? Volverá a aparecer en la lista principal de usuarios.</p>
+      <div *ngIf="unbanError()" style="color:#b91c1c;font-size:13px;margin-bottom:12px;">{{ unbanError() }}</div>
+      <div style="display:flex;gap:10px;justify-content:flex-end;">
+        <button (click)="cancelUnban()" [disabled]="unbanning()" style="padding:8px 14px;border-radius:8px;border:1px solid #d1d5db;background:#fff;font-size:13px;cursor:pointer;">Cancelar</button>
+        <button (click)="confirmUnban()" [disabled]="unbanning()" style="padding:8px 14px;border-radius:8px;border:1px solid #059669;background:#059669;color:#fff;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px;">
+          <span *ngIf="!unbanning()">Desbanear</span>
+          <span *ngIf="unbanning()">Desbaneando...</span>
+        </button>
+      </div>
+    </div>
   </div>
 </div>
