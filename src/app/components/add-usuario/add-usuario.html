@@ -1,38 +1,39 @@
 <div class="upload-form-wrapper">
   <h1 class="form-prod-title">AGREGAR USUARIO</h1>
   <hr />
-  <form class="upload-form">
+  <form class="upload-form" (ngSubmit)="submit()" #form="ngForm">
+    <div *ngIf="error()" style="color:#b91c1c;font-size:13px;margin-bottom:10px;">{{ error() }}</div>
+    <div *ngIf="loading()" style="color:#374151;font-size:13px;margin-bottom:10px;">Creando usuario...</div>
+
     <label for="nombre">Nombre *</label>
-    <input id="nombre" type="text" class="form-control form-prod-input" placeholder="Nombre completo *" required />
+    <input id="nombre" name="nombre" type="text" class="form-control form-prod-input" placeholder="Nombre completo *" [(ngModel)]="nombre" required />
 
     <label for="email">Email *</label>
-    <input id="email" type="email" class="form-control form-prod-input" placeholder="usuario@ejemplo.com *" required />
+    <input id="email" name="email" type="email" class="form-control form-prod-input" placeholder="usuario@ejemplo.com *" [(ngModel)]="email" required />
 
     <label for="rol">Rol *</label>
-    <select id="rol" class="form-select form-prod-input" required>
+    <select id="rol" name="rol" class="form-select form-prod-input" [(ngModel)]="rol" required>
       <option value="" disabled selected></option>
       <option value="admin">Admin</option>
-      <option value="editor">Editor</option>
-      <option value="viewer">Viewer</option>
+      <option value="user">User</option>
     </select>
 
     <label for="estado">Estado</label>
-    <select id="estado" class="form-select form-prod-input">
+    <select id="estado" name="estado" class="form-select form-prod-input" [(ngModel)]="estado">
       <option value="active">Activo</option>
-      <option value="suspended">Suspendido</option>
-      <option value="banned">Baneado</option>
+      <option value="inactive">Inactivo</option>
     </select>
 
     <label for="acceso">Acceso</label>
-    <select id="acceso" class="form-select form-prod-input">
+    <select id="acceso" name="acceso" class="form-select form-prod-input" [(ngModel)]="acceso">
       <option value="full">Full</option>
       <option value="limited">Limited</option>
       <option value="read">Read</option>
     </select>
 
     <div class="form-actions">
-      <button type="submit" class="btn form-prod-btn">Agregar</button>
-      <button type="button" class="btn form-prod-btn form-prod-btn-cancel">Cancelar</button>
+      <button type="submit" class="btn form-prod-btn" [disabled]="form.invalid || loading()">Agregar</button>
+      <button type="button" class="btn form-prod-btn form-prod-btn-cancel" (click)="onCancel()" [disabled]="loading()">Cancelar</button>
     </div>
   </form>
 </div>
